@@ -10,8 +10,8 @@ package DTO;
  * @author Kayde
  */
 public class PlaneDTO {
-    int PlaneID, Capacity, noCrew;
-    String planeModel;
+    private int PlaneID, Capacity, noCrew;
+    private String planeModel;
     public PlaneDTO(int PlaneID, String planeModel, int Capacity, int noCrew){
         this.PlaneID = PlaneID;
         this.planeModel = planeModel;
