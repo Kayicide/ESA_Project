@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-Feb-2019, 14:44:23
+    Author     : Kaede & Jake
+*/
+
+.myButtons{
+    color: white;
+    background: #757575;
+    border-color: black;
+    border-width: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 3px;
+}
+
+.myButtons:hover:enabled{
+    background: #a4a4a4;
+}
+
+.topnav {
+    background-color: #494949;
+    overflow: hidden;
+    width: 100%;
+    padding: 0px;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+    </head>
+    <body> 
+        <ui:composition>
+            <h:outputStylesheet name="style.css"/>
+            <h:form class="topnav">
+                <div style="float: left;">
+                    <h:commandButton value="Home" action="/index" styleClass="myButtons"></h:commandButton>
+                    <h:commandButton value="Flights" action="/flights" styleClass="myButtons" rendered=""></h:commandButton>
+                    <h:commandButton value="My Bookings" action="/bookings" styleClass="myButtons" rendered=""></h:commandButton>
+                    <h:commandButton value="Flights" action="/Admin/films" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"></h:commandButton>
+                    <h:commandButton value="Users" action="/Admin/users" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"></h:commandButton>
+                </div>
+                <div style="float: right;">
+                    <h:commandButton value="Account" action="/userUpdate" styleClass="myButtons"></h:commandButton>
+                    <h:commandButton value="Logout" action="#{UserBean.logout}" styleClass="myButtons"></h:commandButton>
+                </div>
+            </h:form>
+        </ui:composition>
+    </body>
+    
+</html>
