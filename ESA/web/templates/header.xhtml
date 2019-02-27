@@ -16,8 +16,8 @@ and open the template in the editor.
             <h:form class="topnav">
                 <div style="float: left;">
                     <h:commandButton value="Home" action="/index" styleClass="myButtons"></h:commandButton>
-                    <h:commandButton value="Flights" action="/flights" styleClass="myButtons" rendered=""></h:commandButton>
-                    <h:commandButton value="My Bookings" action="/bookings" styleClass="myButtons" rendered=""></h:commandButton>
+                    <h:commandButton value="Flights" action="/flights" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
+                    <h:commandButton value="My Bookings" action="/bookings" styleClass="myButtons" rendered="#{UserBean.loggedIn and !(UserBean.currentUser.isAdmin)}"></h:commandButton>
                     <h:commandButton value="Flights" action="/Admin/films" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"></h:commandButton>
                     <h:commandButton value="Users" action="/Admin/users" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"></h:commandButton>
                 </div>
