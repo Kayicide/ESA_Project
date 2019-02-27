@@ -5,10 +5,14 @@
  */
 package Gateway;
 
+import DTO.UserDTO;
+
 /**
  *
  * @author Kayde
  */
 public class UserGateway extends GatewayAbstract{
-    
+    public boolean login(UserDTO user){
+        return false;
+    }
 }

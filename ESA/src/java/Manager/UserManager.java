@@ -5,6 +5,7 @@
  */
 package Manager;
 
+import DTO.UserDTO;
 import Gateway.UserGateway;
 import static Manager.ManagerAbstract.gatewayFactory;
 
@@ -14,4 +15,8 @@ import static Manager.ManagerAbstract.gatewayFactory;
  */
 public class UserManager extends ManagerAbstract {
     private final UserGateway gateway = (UserGateway)gatewayFactory.create(gatewayFactory.USER_GATEWAY); 
+    
+    public boolean login(UserDTO user){
+        return gateway.login(user);
+    }
 }

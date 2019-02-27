@@ -5,10 +5,13 @@
  */
 package Command;
 
+import Manager.ManagerFactory;
+
 /**
  *
  * @author Kayde
  */
 public interface Command {
+    public static final ManagerFactory managerFactory = new ManagerFactory();
     public Object execute();
 }
