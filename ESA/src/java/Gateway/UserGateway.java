@@ -7,8 +7,8 @@ package Gateway;
 
 /**
  *
- * @author kayde
+ * @author Kayde
  */
-public class GatewayAbstact {
+public class UserGateway extends GatewayAbstract{
     
 }
