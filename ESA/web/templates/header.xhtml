@@ -18,12 +18,13 @@ and open the template in the editor.
                     <h:commandButton value="Home" action="/index" styleClass="myButtons"></h:commandButton>
                     <h:commandButton value="Flights" action="/flights" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:commandButton value="My Bookings" action="/bookings" styleClass="myButtons" rendered="#{UserBean.loggedIn and !(UserBean.currentUser.isAdmin)}"></h:commandButton>
-                    <h:commandButton value="Flights" action="/Admin/films" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"></h:commandButton>
-                    <h:commandButton value="Users" action="/Admin/users" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"></h:commandButton>
+                    <h:commandButton value="Flights" action="/Admin/films" styleClass="myButtons" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}"></h:commandButton>
+                    <h:commandButton value="Users" action="/Admin/users" styleClass="myButtons" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}"></h:commandButton>
                 </div>
                 <div style="float: right;">
-                    <h:commandButton value="Account" action="/userUpdate" styleClass="myButtons"></h:commandButton>
-                    <h:commandButton value="Logout" action="#{UserBean.logout}" styleClass="myButtons"></h:commandButton>
+                    <h:commandButton value="Account" action="/userUpdate" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
+                    <h:commandButton value="Logout" action="#{UserBean.logout}" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
+                    <h:commandButton value="Login" action="/login" styleClass="myButtons" rendered="#{(!UserBean.loggedIn)}"></h:commandButton>
                 </div>
             </h:form>
         </ui:composition>
