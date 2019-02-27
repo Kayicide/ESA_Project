@@ -5,12 +5,15 @@
  */
 package Command;
 
+import DTO.UserDTO;
+import Manager.ManagerFactory;
+
 /**
  *
  * @author Kayde
  */
 public class CommandFactory {
-
+    static final ManagerFactory managerFactory = new ManagerFactory();
     //Basic
     public static final int REGISTER_USER = 1;
     public static final int LOGIN = 2;
@@ -30,6 +33,14 @@ public class CommandFactory {
 
     public static Command createCommand(int commandType) {
         switch (commandType) {
+            default:
+                return null;
+        }
+    }
+    public static Command createCommand(int commandType, UserDTO user) {
+        switch (commandType) {
+            case LOGIN:
+                return new Login(user);
             default:
                 return null;
         }

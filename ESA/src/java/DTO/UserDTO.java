@@ -11,31 +11,34 @@ package DTO;
  */
 public class UserDTO {
     private String UserID;
+    private String password;
     private String fullName;
     private String address;
     private int age;
     private int passportNumber;
     private boolean isAdmin;
     
-    public UserDTO(String userID){
+    public UserDTO(String userID, String password){
         this.UserID = userID;
     }
-    public UserDTO(String userID, String fullName, String address, int age, int passportNumber){
-        this(userID);
+    public UserDTO(String userID, String password, String fullName, String address, int age, int passportNumber){
+        this(userID, password);
         this.fullName = fullName;
         this.address = address;
         this.age = age;
         this.passportNumber = passportNumber;
     }
-    public UserDTO(String userID, String fullName, String address, int age, int passportNumber, boolean isAdmin){
-        this(userID, fullName,address, age, passportNumber);
+    public UserDTO(String userID, String password, String fullName, String address, int age, int passportNumber, boolean isAdmin){
+        this(userID, password, fullName,address, age, passportNumber);
         this.isAdmin = isAdmin;
     }
 
     public String getUserID() {
         return UserID;
     }
-
+    public String getPassword() {
+        return password;
+    }
     public String getFullName() {
         return fullName;
     }
@@ -58,6 +61,10 @@ public class UserDTO {
 
     public void setUserID(String UserID) {
         this.UserID = UserID;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public void setFullName(String fullName) {
