@@ -19,4 +19,8 @@ public class UserManager extends ManagerAbstract {
     public boolean login(UserDTO user){
         return gateway.login(user);
     }
+    
+    public boolean register(UserDTO user){
+        return gateway.register(user);
+    }
 }

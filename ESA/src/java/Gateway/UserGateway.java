@@ -15,4 +15,8 @@ public class UserGateway extends GatewayAbstract{
     public boolean login(UserDTO user){
         return false;
     }
+    
+    public boolean register(UserDTO user){
+        return false;
+    }
 }

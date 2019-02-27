@@ -10,37 +10,47 @@ package DTO;
  * @author Kayde
  */
 public class UserDTO {
-    private String UserID;
+
+    private String username;
     private String password;
-    private String fullName;
+    private String fullname;
     private String address;
     private int age;
     private int passportNumber;
     private boolean isAdmin;
     
-    public UserDTO(String userID, String password){
-        this.UserID = userID;
+    public UserDTO(String username) {
+        this.username = username;
     }
-    public UserDTO(String userID, String password, String fullName, String address, int age, int passportNumber){
-        this(userID, password);
-        this.fullName = fullName;
+    
+    public UserDTO(String username, String password) {
+        this(username);
+        this.password = password;
+    }
+
+    public UserDTO(String username, String password, String fullname, String address, int age, int passportNumber) {
+        this(username, password);
+        this.fullname = fullname;
         this.address = address;
         this.age = age;
         this.passportNumber = passportNumber;
     }
-    public UserDTO(String userID, String password, String fullName, String address, int age, int passportNumber, boolean isAdmin){
-        this(userID, password, fullName,address, age, passportNumber);
+
+    public UserDTO(String username, String password, String fullname, String address, int age, int passportNumber, boolean isAdmin) {
+        this(username, password, fullname, address, age, passportNumber);
         this.isAdmin = isAdmin;
     }
 
-    public String getUserID() {
-        return UserID;
+    public String getUsername() {
+        return username;
     }
+
     public String getPassword() {
         return password;
     }
-    public String getFullName() {
-        return fullName;
+
+    public String getFullname() {
+        return fullname;
     }
 
     public String getAddress() {
@@ -59,16 +69,16 @@ public class UserDTO {
         return isAdmin;
     }
 
-    public void setUserID(String UserID) {
-        this.UserID = UserID;
+    public void setUsername(String username) {
+        this.username = username;
     }
-    
-    public void setPassword(String password){
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public void setAddress(String address) {

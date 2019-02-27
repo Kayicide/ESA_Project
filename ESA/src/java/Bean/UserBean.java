@@ -49,7 +49,7 @@ public class UserBean implements Serializable {
         } catch (NoSuchAlgorithmException ex) {
             this.password = "";
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
-}
+        }
     }
     
     
