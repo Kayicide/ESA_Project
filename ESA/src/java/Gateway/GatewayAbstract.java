@@ -5,10 +5,20 @@
  */
 package Gateway;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author kayde
  */
 public abstract class GatewayAbstract {
-    protected static final DatabaseManager database = DatabaseManager.getInstance();
+    protected static final DatabaseManager database = DatabaseManager.getInstance(); 
+    protected void finishSQL(Connection conn){
+        try{
+            database.finishWithConnection(conn); 
+        }catch(SQLException e){
+            //do nothing I guess? This should never fail.
+        }
+    }
 }

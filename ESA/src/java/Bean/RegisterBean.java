@@ -18,8 +18,8 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class RegisterBean {
 
-    private String username, password, confirmPassword, fullname, address;
-    private int age, passportNumber;
+    private String username, password, confirmPassword, fullname, address, passportNumber;
+    private int age;
 
     public void setUsername(String username) {
         this.username = username;
@@ -45,7 +45,7 @@ public class RegisterBean {
         this.age = age;
     }
 
-    public void setPassportNumber(int passportNumber) {
+    public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
     }
 
@@ -73,7 +73,7 @@ public class RegisterBean {
         return age;
     }
 
-    public int getPassportNumber() {
+    public String getPassportNumber() {
         return passportNumber;
     }
 

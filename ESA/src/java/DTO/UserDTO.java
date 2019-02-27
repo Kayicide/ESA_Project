@@ -16,7 +16,7 @@ public class UserDTO {
     private String fullname;
     private String address;
     private int age;
-    private int passportNumber;
+    private String passportNumber;
     private boolean isAdmin;
     
     public UserDTO(String username) {
@@ -28,7 +28,7 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserDTO(String username, String password, String fullname, String address, int age, int passportNumber) {
+    public UserDTO(String username, String password, String fullname, String address, int age, String passportNumber) {
         this(username, password);
         this.fullname = fullname;
         this.address = address;
@@ -36,7 +36,7 @@ public class UserDTO {
         this.passportNumber = passportNumber;
     }
 
-    public UserDTO(String username, String password, String fullname, String address, int age, int passportNumber, boolean isAdmin) {
+    public UserDTO(String username, String password, String fullname, String address, int age, String passportNumber, boolean isAdmin) {
         this(username, password, fullname, address, age, passportNumber);
         this.isAdmin = isAdmin;
     }
@@ -61,7 +61,7 @@ public class UserDTO {
         return age;
     }
 
-    public int getPassportNumber() {
+    public String getPassportNumber() {
         return passportNumber;
     }
 
@@ -89,7 +89,7 @@ public class UserDTO {
         this.age = age;
     }
 
-    public void setPassportNumber(int passportNumber) {
+    public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
     }
 
