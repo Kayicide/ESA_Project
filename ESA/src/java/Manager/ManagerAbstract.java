@@ -6,6 +6,7 @@
 package Manager;
 
 import Gateway.GatewayFactory;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,4 +14,10 @@ import Gateway.GatewayFactory;
  */
 public abstract class ManagerAbstract {
     protected static final GatewayFactory gatewayFactory = new GatewayFactory(); 
+    
+    public abstract boolean add(Object obj);
+    public abstract boolean delete(int id);
+    public abstract ArrayList<Object> getAll();
+    public abstract Object getById(int id);
+    
 }
