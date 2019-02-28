@@ -38,7 +38,6 @@ public class DatabaseManager
     {
         if (conn != null)
         {
-            //lol gay
             conn.close();
         }
     }

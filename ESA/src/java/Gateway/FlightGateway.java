@@ -10,5 +10,7 @@ package Gateway;
  * @author Kayde
  */
 public class FlightGateway extends GatewayAbstract{
-    
+    public void update(){
+        
+    }
 }
