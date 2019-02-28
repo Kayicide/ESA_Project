@@ -7,6 +7,7 @@ package Manager;
 
 import Gateway.FlightGateway;
 import static Manager.ManagerAbstract.gatewayFactory;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,4 +15,24 @@ import static Manager.ManagerAbstract.gatewayFactory;
  */
 public class FlightManager extends ManagerAbstract{
     private final FlightGateway gateway = (FlightGateway)gatewayFactory.create(gatewayFactory.FLIGHT_GATEWAY);
+
+    @Override
+    public boolean add(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Object> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object getById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -8,6 +8,7 @@ package Manager;
 import DTO.UserDTO;
 import Gateway.UserGateway;
 import static Manager.ManagerAbstract.gatewayFactory;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,5 +23,25 @@ public class UserManager extends ManagerAbstract {
     
     public boolean register(UserDTO user){
         return gateway.register(user);
+    }
+
+    @Override
+    public boolean add(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Object> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object getById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
