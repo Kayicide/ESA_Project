@@ -17,6 +17,10 @@ public class DatabaseManager
 {
     private static final DatabaseManager INSTANCE = new DatabaseManager(); //could change the singleton into dependency injection
     
+    private DatabaseManager(){
+        
+    }
+    
     public static final DatabaseManager getInstance()
     {
         return INSTANCE;
@@ -34,6 +38,7 @@ public class DatabaseManager
     {
         if (conn != null)
         {
+            //lol gay
             conn.close();
         }
     }
