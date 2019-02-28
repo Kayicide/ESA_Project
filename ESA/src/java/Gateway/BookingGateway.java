@@ -10,5 +10,7 @@ package Gateway;
  * @author Kayde
  */
 public class BookingGateway extends GatewayAbstract{
-    
+    public void update(){
+        
+    }
 }
