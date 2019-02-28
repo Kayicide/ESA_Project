@@ -5,6 +5,7 @@
  */
 package Manager;
 
+import DTO.FlightDTO;
 import Gateway.FlightGateway;
 import static Manager.ManagerAbstract.gatewayFactory;
 import java.util.ArrayList;
@@ -18,21 +19,22 @@ public class FlightManager extends ManagerAbstract{
 
     @Override
     public boolean add(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FlightDTO dto = (FlightDTO)obj;
+        return gateway.insert(dto);
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.delete(id);
     }
 
     @Override
     public ArrayList<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.getAll();
     }
 
     @Override
     public Object getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.getByID();
     }
 }

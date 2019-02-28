@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -63,6 +64,20 @@ public class UserGateway extends GatewayAbstract {
             e.printStackTrace();
             return false;
         }
+    }
+        
+    public boolean delete(int id){
+       return true; 
+    }
+        
+    public ArrayList<Object> getAll(){
+        ArrayList<Object> userList = new ArrayList<>();
+        return userList;
+    }
+    
+        public Object getByID(int id){
+        UserDTO dto = new UserDTO(null);
+        return dto;
     }
     //this is me testing the committ stuff
 }

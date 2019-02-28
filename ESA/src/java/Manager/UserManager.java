@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class UserManager extends ManagerAbstract {
     private final UserGateway gateway = (UserGateway)gatewayFactory.create(gatewayFactory.USER_GATEWAY); 
     
+    
     public boolean login(UserDTO user){
         return gateway.login(user);
     }
@@ -32,16 +33,16 @@ public class UserManager extends ManagerAbstract {
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.delete(id);
     }
 
     @Override
     public ArrayList<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.getAll();
     }
 
     @Override
     public Object getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.getByID();
     }
 }
