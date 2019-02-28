@@ -43,6 +43,6 @@ public class UserManager extends ManagerAbstract {
 
     @Override
     public Object getById(int id) {
-        return gateway.getByID();
+        return gateway.getByID(id);
     }
 }
