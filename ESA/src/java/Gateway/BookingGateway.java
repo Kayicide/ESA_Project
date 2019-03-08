@@ -98,8 +98,12 @@ public class BookingGateway extends GatewayAbstract{
                 UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, 0, rs.getString("passportNumber"), false);
                 FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
                 
-                //BookingDTO booking = new BookingDTO(user, flight, date? )
-                //bookingList.add(booking);
+                //date to calendar
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(rs.getDate("dateTimeBooked"));
+                
+                BookingDTO booking = new BookingDTO(user, flight, cal);
+                bookingList.add(booking);
             }
             
             rs.close();
@@ -134,8 +138,17 @@ public class BookingGateway extends GatewayAbstract{
             {
                 UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, 0, rs.getString("passportNumber"), false);
                 FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
-                //booking = new BookingDTO(user, flight, date? );
+                
+                //date to calendar
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(rs.getDate("dateTimeBooked"));
+                
+                booking = new BookingDTO(user, flight, cal);
             }
+            
+            rs.close();
+            stmt.close();
+            finishSQL(conn);
             
         }
         catch(SQLException ex)
