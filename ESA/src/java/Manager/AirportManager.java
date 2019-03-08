@@ -34,6 +34,13 @@ public class AirportManager extends ManagerAbstract {
 
     @Override
     public Object getById(int id) {
+        //should not be called
+        return null;
+    }
+    
+    @Override
+    public Object getById(String id)
+    {
         return gateway.getByID(id);
     }
 }

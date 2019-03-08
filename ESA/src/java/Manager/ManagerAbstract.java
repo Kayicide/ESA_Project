@@ -20,4 +20,17 @@ public abstract class ManagerAbstract {
     public abstract ArrayList<Object> getAll();
     public abstract Object getById(int id);
     
+    //non abstract methods that pass String instead of int
+    public Object getById(String id)
+    {
+        //should be over written
+        throw new UnsupportedOperationException();
+    }
+    
+    public boolean delete(String id)
+    {
+        //should be over written
+        throw new UnsupportedOperationException();
+    }
+    
 }
