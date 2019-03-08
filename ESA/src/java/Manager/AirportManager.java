@@ -24,6 +24,13 @@ public class AirportManager extends ManagerAbstract {
 
     @Override
     public boolean delete(int id) {
+        //should be over written
+        throw new UnsupportedOperationException();
+    }
+    
+    @Override
+    public boolean delete(String id) 
+    {
         return gateway.delete(id);
     }
 
@@ -34,8 +41,8 @@ public class AirportManager extends ManagerAbstract {
 
     @Override
     public Object getById(int id) {
-        //should not be called
-        return null;
+        //should be over written
+        throw new UnsupportedOperationException();
     }
     
     @Override
