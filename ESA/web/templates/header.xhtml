@@ -25,6 +25,7 @@ and open the template in the editor.
                     <h:commandButton value="Account" action="/userUpdate" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:commandButton value="Logout" action="#{UserBean.logout}" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:commandButton value="Login" action="/login" styleClass="myButtons" rendered="#{(!UserBean.loggedIn)}"></h:commandButton>
+                    <h:commandButton value="Register" action="/register" styleClass="myButtons" rendered="#{(!UserBean.loggedIn)}"></h:commandButton>
                 </div>
             </h:form>
         </ui:composition>

@@ -42,13 +42,22 @@ hr {
 } 
 
 .borderTable{   
-    background-color: #b22222;
     border: black solid medium;
 }
 
 
 .tableRow{
     text-align:right;
-    background-color: #c64739;
     vertical-align: top;
+}
+
+.registerForm {
+    box-sizing: border-box;
+    width:400px;
+    height:600px;
+    outline:2px dashed black;
+}
+
+h3{
+    font-family: arial;
 }
