@@ -17,36 +17,36 @@
                             <h3>Account Details </h3>
                             <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
                             <h:outputText value="Username: "/>
-                            <h:inputText value="#{RegisterBean.username}"/>
+                            <h:inputText value="#{registerBean.username}"/>
                             <h:outputText value="Password: "/>
-                            <h:inputSecret value="#{RegisterBean.password}"/>
+                            <h:inputSecret value="#{registerBean.password}"/>
                             <h:outputText value="Confirm Password: "/>
-                            <h:inputSecret value="#{RegisterBean.confirmPassword}"/>
+                            <h:inputSecret value="#{registerBean.confirmPassword}"/>
                             </h:panelGrid>
                             <h3>Personal Information</h3>
                             <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
                             <h:outputText value="Full name: "/>
-                            <h:inputText value="#{RegisterBean.fullname}"/>
+                            <h:inputText value="#{registerBean.fullname}"/>
                             <h:outputText value="Age: "/>
-                            <h:inputText value="#{RegisterBean.age}"/>
+                            <h:inputText value="#{registerBean.age}"/>
                             <h:outputText value="Address Line 1: "/>
-                            <h:inputText value="#{RegisterBean.addressLine1}"/>
+                            <h:inputText value="#{registerBean.addressLine1}"/>
                             <h:outputText value="Address Line 2: "/>
-                            <h:inputText value="#{RegisterBean.addressLine2}"/>
+                            <h:inputText value="#{registerBean.addressLine2}"/>
                             <h:outputText value="City: "/>
-                            <h:inputText value="#{RegisterBean.addressCity}"/>
+                            <h:inputText value="#{registerBean.addressCity}"/>
                             <h:outputText value="County: "/>
-                            <h:inputText value="#{RegisterBean.addressCounty}"/>
+                            <h:inputText value="#{registerBean.addressCounty}"/>
                             <h:outputText value="Postcode: "/>
-                            <h:inputText value="#{RegisterBean.addressPostcode}"/>
+                            <h:inputText value="#{registerBean.addressPostcode}"/>
                             </h:panelGrid>
                             <h3>Passport Information </h3>
                             <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
                             <h:outputText value="Passport Number: "/>
-                            <h:inputText value="#{RegisterBean.addressPostcode}"/>
+                            <h:inputText value="#{registerBean.addressPostcode}"/>
                             </h:panelGrid>
                             <h:panelGrid columns="2">
-                            <h:commandButton type="submit" value="Create account" action="#{RegisterBean.register()}" /> 
+                            <h:commandButton type="submit" value="Create account" action="#{registerBean.register()}" /> 
                             <h:commandButton type="submit" value="Cancel" action="index" /> 
                             </h:panelGrid>
                     </h:form>
