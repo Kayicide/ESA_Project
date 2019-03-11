@@ -20,7 +20,7 @@ public class Register implements Command{
     }
     @Override
     public Object execute() {
-        return ((UserManager)managerFactory.create(managerFactory.USER_MANAGER)).register(user);
+        return ((UserManager)managerFactory.create(managerFactory.USER_MANAGER)).add(user);
     }
     
 }

@@ -21,12 +21,6 @@ public class AirportManager extends ManagerAbstract {
         AirportDTO dto = (AirportDTO)obj;
         return gateway.insert(dto);
     }
-
-    @Override
-    public boolean delete(int id) {
-        //should be over written
-        throw new UnsupportedOperationException();
-    }
     
     @Override
     public boolean delete(String id) 
@@ -38,16 +32,21 @@ public class AirportManager extends ManagerAbstract {
     public ArrayList<Object> getAll() {
         return gateway.getAll();
     }
-
-    @Override
-    public Object getById(int id) {
-        //should be over written
-        throw new UnsupportedOperationException();
-    }
     
     @Override
     public Object getById(String id)
     {
         return gateway.getByID(id);
+    }
+    
+    
+    //Not needed for this boi
+    @Override
+    public Object getById(int id) {
+        throw new UnsupportedOperationException();
+    }
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException();
     }
 }

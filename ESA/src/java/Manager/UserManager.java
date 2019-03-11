@@ -21,14 +21,10 @@ public class UserManager extends ManagerAbstract {
     public boolean login(UserDTO user){
         return gateway.login(user);
     }
-    
-    public boolean register(UserDTO user){
-        return gateway.register(user);
-    }
 
     @Override
     public boolean add(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gateway.register((UserDTO)obj);
     }
 
     @Override
