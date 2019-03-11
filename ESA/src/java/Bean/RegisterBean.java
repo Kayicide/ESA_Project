@@ -18,7 +18,9 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class RegisterBean {
 
-    private String username, password, confirmPassword, fullname, address, passportNumber;
+    private String addressLine1, addressLine2,addressCity, addressCounty, addressPostcode;
+    private String username, password, confirmPassword, fullname, passportNumber;
+    private String[] address;
     private int age;
 
     public void setUsername(String username) {
@@ -36,9 +38,37 @@ public class RegisterBean {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
+    
+    public void setAddressLine1(String addressLine1){
+        this.addressLine1 = addressLine1;
+    }
+    
+    public void setAddressLine2(String addressLine2){
+        this.addressLine2 = addressLine2;
+    }
+    
+    public void setAddressCity(String addressCity){
+        this.addressCity = addressCity;
+    }
+    
+    public void setAddressCounty(String addressCounty){
+        this.addressCounty = addressCounty;
+    }
+    
+    public void setAddressPostcode(String addressPostcode){
+        this.addressPostcode = addressPostcode;
+    }
 
     public void setAddress(String address) {
-        this.address = address;
+       String[] adr = new String[4];
+       
+       adr[0] = addressLine1;
+       adr[1] = addressLine2;
+       adr[2] = addressCity;
+       adr[3] = addressCounty;
+       adr[4] = addressPostcode;
+       
+       this.address = adr;
     }
 
     public void setAge(int age) {
@@ -64,8 +94,27 @@ public class RegisterBean {
     public String getFullname() {
         return fullname;
     }
+    
+    public String getAddressLine1(){
+        return addressLine1;
+    }
+    
+    public String getAddressLine2(){
+        return addressLine2;
+    }
 
-    public String getAddress() {
+    public String getAddressCity(){
+        return addressCity;
+    }
+    
+    public String getAddressCounty(){
+        return addressCounty;
+    }
+    
+    public String getAddressPostcode(){
+        return addressPostcode;
+    }
+    public String[] getAddress() {
         return address;
     }
 

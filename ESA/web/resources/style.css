@@ -31,3 +31,24 @@ body{
     width: 100%;
     padding: 0px;
 }
+hr { 
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+} 
+
+.borderTable{   
+    background-color: #b22222;
+    border: black solid medium;
+}
+
+
+.tableRow{
+    text-align:right;
+    background-color: #c64739;
+    vertical-align: top;
+}
