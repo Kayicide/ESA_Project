@@ -26,18 +26,19 @@ public class UserGateway extends GatewayAbstract {
             conn = database.getConnection();
             int addressID;
             String[] address = new String[4];
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Users WHERE username = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM USER_INFO WHERE username = ?");
             stmt.setString(1, user.getUsername());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 if (rs.getString("password").equals(user.getPassword())) {
                     //gets the user information
-                    user.setFullname(rs.getString("fullname"));
-                    user.setPassword(rs.getString("password"));
+                    user.setFirstName(rs.getString("FIRSTNAME"));
+                    user.setFirstName(rs.getString("SURNAME"));
+                    user.setPassword(rs.getString("PASSWORD"));
                     addressID = rs.getInt("ADDRESS_ID");
-                    user.setAge(rs.getInt("age"));
+                    user.setAge(rs.getInt("AGE"));
                     user.setPassportNumber(rs.getString("passportNumber"));
-                    user.setIsAdmin(rs.getBoolean("admin"));
+                    user.setIsAdmin(rs.getBoolean("ADMIN"));
                     
                     //gets the address information
                     stmt = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
@@ -80,30 +81,26 @@ public class UserGateway extends GatewayAbstract {
                 ResultSet rs = stmt.getGeneratedKeys();
                 rs.next();
                 int ADDRESS_ID = rs.getInt(1);
-                stmt = conn.prepareStatement("INSERT INTO USER (USERNAME, PASSWORD, FIRSTNAME, SURNAME, ADDRESS_ID, ADMIN) VALUES (?, ?, ?, ?, ?, ?)");
+                stmt = conn.prepareStatement("INSERT INTO USER_INFO (USERNAME, PASSWORD, FIRSTNAME, SURNAME, ADDRESS_ID, ADMIN) VALUES (?, ?, ?, ?, ?, ?)");
                 stmt.setString(1, user.getUsername());
-                stmt.setString(2, user.getFirstName());
-                stmt.setString(3, user.getSurname());
-                
-                //not finished yet
-                
-                
+                stmt.setString(2, user.getPassword());
+                stmt.setString(3, user.getFirstName());
+                stmt.setString(4, user.getSurname());
+                stmt.setInt(5, ADDRESS_ID);
+                stmt.setBoolean(6, user.isIsAdmin());
+                if(stmt.executeUpdate() == 0){
+                    System.out.println("FAILED TO ADD USER"); //FOR TESTING, REMOVE THIS AFTER!
+                    finishSQL(conn);
+                    return false;
+                }
+                //ALLS GOOD!
+                finishSQL(conn);
+                return true;
             }else{
-                //failed to add address
+                 System.out.println("FAILED TO ADD ADDRESS!"); //FOR TESTING, REMOVE THIS AFTER!
                 finishSQL(conn);
                 return false;
             }
-
-            
-            
-            
-            
-            
-            
-            
-            
-            database.finishWithConnection(conn);
-            return true;
         } catch (SQLException e) {
             //idk if we should do anything here or not.
             e.printStackTrace();
@@ -120,9 +117,8 @@ public class UserGateway extends GatewayAbstract {
         return userList;
     }
     
-        public Object getByID(int id){
+    public Object getByID(int id){
         UserDTO dto = new UserDTO(null);
         return dto;
     }
-    //this is me testing the committ stuff
 }

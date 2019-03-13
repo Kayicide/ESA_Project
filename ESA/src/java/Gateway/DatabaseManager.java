@@ -28,10 +28,10 @@ public class DatabaseManager
 
     public Connection getConnection() throws SQLException //currently set up to use JavaDB this can be changed
     {
-        String dbaseURL = "";
+        String dbaseURL = "jdbc:derby://localhost:1527/ESA;create=true;user=ESA;password=ESA"; // Change this to your thing
         DriverManager.registerDriver(
                 new org.apache.derby.jdbc.ClientDriver());
-        return DriverManager.getConnection(dbaseURL, "Username", "Password");
+        return DriverManager.getConnection(dbaseURL, "ESA", "ESA");
     }
 
     public void finishWithConnection(Connection conn) throws SQLException
