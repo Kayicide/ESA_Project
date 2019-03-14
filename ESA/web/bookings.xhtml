@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">    
+    
+    <h:head>
+        <title>Bookings</title>
+    </h:head>
+    <h:body>
+         <ui:composition template = "templates/common.xhtml">
+            <ui:define name="content">   
+                 <h:form>
+                        <h:dataTable value=""
+                                     var="show"
+                                     styleClass="frontTable">   
+                            <h:column>
+                                <f:facet name="header">Booking ID?</f:facet>
+                                <h:outputText value=""/>
+                            </h:column> 
+
+                            <h:column>
+                                <f:facet name="header">Flight ID</f:facet>
+                                <h:outputText value=""/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Departure</f:facet>
+                                <h:outputText value=""/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Route</f:facet>
+                                <h:outputText value=""/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Destination</f:facet>
+                                <h:outputText value=""/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:outputText value=""/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">Options</f:facet>
+                                <h:commandButton value="Book showing" action=""/>
+                            </h:column>
+
+                        </h:dataTable>   
+                </h:form>
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>
+
