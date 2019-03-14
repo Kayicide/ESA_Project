@@ -7,6 +7,10 @@ package Bean;
 
 import Command.CommandFactory;
 import DTO.UserDTO;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -19,7 +23,7 @@ import javax.enterprise.context.RequestScoped;
 public class RegisterBean {
 
     private String addressLine1, addressLine2,addressCity, addressCounty, addressPostcode;
-    private String username, password, confirmPassword, fullname, passportNumber;
+    private String username, password, confirmPassword, firstname, surname, passportNumber;
     private String[] address;
     private int age;
 
@@ -35,8 +39,11 @@ public class RegisterBean {
         this.confirmPassword = confirmPassword;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
     
     public void setAddressLine1(String addressLine1){
@@ -59,8 +66,8 @@ public class RegisterBean {
         this.addressPostcode = addressPostcode;
     }
 
-    public void setAddress(String address) {
-       String[] adr = new String[4];
+    public void setAddress() {
+       String[] adr = new String[5];
        
        adr[0] = addressLine1;
        adr[1] = addressLine2;
@@ -68,6 +75,11 @@ public class RegisterBean {
        adr[3] = addressCounty;
        adr[4] = addressPostcode;
        
+       
+       System.out.println("ADDRESSLINE 1: " + addressLine1);
+       if(adr != null){
+           System.out.println("TESTING ARRAY: " + adr[0]);
+       }
        this.address = adr;
     }
 
@@ -91,8 +103,11 @@ public class RegisterBean {
         return confirmPassword;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFirstname() {
+        return firstname;
+    }
+    public String getSurname() {
+        return surname;
     }
     
     public String getAddressLine1(){
@@ -131,7 +146,19 @@ public class RegisterBean {
             //display passwords do not match error!
             return null;
         }else{
-            if((Boolean)CommandFactory.createCommand(CommandFactory.LOGIN, new UserDTO(username, password, fullname, address, age, passportNumber, false)).execute()){
+            
+            //creates the address array
+            setAddress();
+            
+            //encrypts the password now that we know they match
+            try{
+                byte[] hash = MessageDigest.getInstance("SHA-256").digest(password.getBytes(StandardCharsets.UTF_8));
+                password = Base64.getEncoder().encodeToString(hash);       
+            }catch(NoSuchAlgorithmException e){
+                //failed to encrypt password!
+            }
+
+            if((Boolean)CommandFactory.createCommand(CommandFactory.REGISTER_USER, new UserDTO(username, password, firstname, surname, address, age, passportNumber, false)).execute()){
                 return "/login"; //user has been registered so forward them to the login page!
             }else{
                 //display registation failed. Username may be taken or sql error!

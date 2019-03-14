@@ -15,7 +15,7 @@ public class UserDTO {
     private String password;
     private String firstName;
     private String surname;
-    private String[] address = new String[4]; // this is 4 so that it can have 4 line 
+    private String[] address = new String[5];
     private int age;
     private String passportNumber;
     private boolean isAdmin;

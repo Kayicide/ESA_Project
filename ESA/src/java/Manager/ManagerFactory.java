@@ -22,17 +22,17 @@ public class ManagerFactory {
     public ManagerAbstract create(int type){
         switch(type){
             case AIRPORT_MANAGER: 
-               break;
+               return new AirportManager();
             case BOOKING_MANAGER: 
-               break;
+               return new BookingManager();
             case FLIGHT_MANAGER: 
-               break;
+               return new FlightManager();
             case PLANE_MANAGER: 
-               break;
+               return new PlaneManager();
             case ROUTE_MANAGER: 
-               break;
+               return new RouteManager();
             case USER_MANAGER: 
-               break;
+               return new UserManager();
             default:
                break;
         }

@@ -41,6 +41,8 @@ public class CommandFactory {
         switch (commandType) {
             case LOGIN:
                 return new Login(user);
+            case REGISTER_USER:
+                return new Register(user);
             default:
                 return null;
         }

@@ -70,24 +70,26 @@ public class UserGateway extends GatewayAbstract {
     }
 
     public boolean register(UserDTO user) {
-        try {
+        try {            
             conn = database.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ADDRESS (LINE1, LINE2, LINE3, LINE4) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ADDRESS (LINE1, LINE2, LINE3, LINE4, LINE5) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, (user.getAddress()[0]));
             stmt.setString(2, (user.getAddress()[1]));
             stmt.setString(3, (user.getAddress()[2]));
             stmt.setString(4, (user.getAddress()[3]));
+            stmt.setString(5, (user.getAddress()[4]));
             if(stmt.executeUpdate() != 0){
                 ResultSet rs = stmt.getGeneratedKeys();
                 rs.next();
                 int ADDRESS_ID = rs.getInt(1);
-                stmt = conn.prepareStatement("INSERT INTO USER_INFO (USERNAME, PASSWORD, FIRSTNAME, SURNAME, ADDRESS_ID, ADMIN) VALUES (?, ?, ?, ?, ?, ?)");
+                stmt = conn.prepareStatement("INSERT INTO USER_INFO (USERNAME, PASSWORD, FIRSTNAME, SURNAME, ADDRESS_ID, ADMIN, PASSPORT_NUMBER) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 stmt.setString(1, user.getUsername());
                 stmt.setString(2, user.getPassword());
                 stmt.setString(3, user.getFirstName());
                 stmt.setString(4, user.getSurname());
                 stmt.setInt(5, ADDRESS_ID);
                 stmt.setBoolean(6, user.isIsAdmin());
+                stmt.setString(7, user.getPassportNumber());
                 if(stmt.executeUpdate() == 0){
                     System.out.println("FAILED TO ADD USER"); //FOR TESTING, REMOVE THIS AFTER!
                     finishSQL(conn);
