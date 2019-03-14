@@ -69,7 +69,11 @@ public class UserBean implements Serializable {
             //return error that user needs to fill the boxes!
             return null;
         }
-        if((Boolean)CommandFactory.createCommand(CommandFactory.LOGIN, new UserDTO(username, password)).execute()){ //if login is successfull then
+        
+        currentUser.setUsername(username);
+        currentUser.setPassword(password);
+        
+        if((Boolean)CommandFactory.createCommand(CommandFactory.LOGIN, currentUser).execute()){ //if login is successfull then
             currentUser = new UserDTO(username, password);
             loggedIn = true;
             return "index.xhtml";
