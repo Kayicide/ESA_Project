@@ -70,11 +70,9 @@ public class UserBean implements Serializable {
             return null;
         }
         
-        currentUser.setUsername(username);
-        currentUser.setPassword(password);
+        currentUser = new UserDTO(username, password); //sets up the user.
         
         if((Boolean)CommandFactory.createCommand(CommandFactory.LOGIN, currentUser).execute()){ //if login is successfull then
-            currentUser = new UserDTO(username, password);
             loggedIn = true;
             return "index.xhtml";
         }else{
