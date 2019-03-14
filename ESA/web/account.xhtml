@@ -6,34 +6,33 @@
       xmlns:ui = "http://java.sun.com/jsf/facelets">    
     
     <h:head>
-        <title>Flights</title>
+        <title>Account - #{UserBean.currentUser.username}</title>
     </h:head>
     <h:body>
          <ui:composition template = "templates/common.xhtml">
-            <ui:define name="content">   
+            <ui:define name="content">
                  <h:form>
                         <h:dataTable value=""
                                      styleClass="frontTable">   
                             <h:column>
-                                <f:facet name="header">Route</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Username</f:facet>
+                                <h:outputText value="#{UserBean.currentUser.username}"/>
                             </h:column> 
 
                             <h:column>
-                                <f:facet name="header">Departure</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Name</f:facet>
+                                <h:outputText value="#{UserBean.currentUser.firstName} #{UserBean.currentUser.surname}"/>
                             </h:column>
-
+                            
                             <h:column>
-                                <f:facet name="header">Status</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Address</f:facet>
+                                <h:outputText value="CONVERT FROM ARRAY"/>
                             </h:column>
-
+                            
                             <h:column>
-                                <f:facet name="header" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">Administrator actions</f:facet>
-                                <h:commandButton value="Book showing" action="" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}" />
+                                <f:facet name="header">Passport Number</f:facet>
+                                <h:outputText value="#{UserBean.currentUser.passportNumber}"/>
                             </h:column>
-
                         </h:dataTable>   
                 </h:form>
             </ui:define>
