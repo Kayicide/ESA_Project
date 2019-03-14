@@ -16,7 +16,6 @@ public class UserDTO {
     private String firstName;
     private String surname;
     private String[] address = new String[5];
-    private int age;
     private String passportNumber;
     private boolean isAdmin;
     
@@ -29,17 +28,16 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserDTO(String username, String password, String firstName, String surname, String[] address, int age, String passportNumber) {
+    public UserDTO(String username, String password, String firstName, String surname, String[] address, String passportNumber) {
         this(username, password);
         this.firstName = firstName;
         this.surname = surname;
         this.address = address;
-        this.age = age;
         this.passportNumber = passportNumber;
     }
 
-    public UserDTO(String username, String password, String firstName, String surname, String[] address, int age, String passportNumber, boolean isAdmin) {
-        this(username, password, firstName, surname, address, age, passportNumber);
+    public UserDTO(String username, String password, String firstName, String surname, String[] address, String passportNumber, boolean isAdmin) {
+        this(username, password, firstName, surname, address, passportNumber);
         this.isAdmin = isAdmin;
     }
 
@@ -63,9 +61,6 @@ public class UserDTO {
         return address;
     }
 
-    public int getAge() {
-        return age;
-    }
 
     public String getPassportNumber() {
         return passportNumber;
@@ -93,10 +88,6 @@ public class UserDTO {
 
     public void setAddress(String[] address) {
         this.address = address;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public void setPassportNumber(String passportNumber) {

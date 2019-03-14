@@ -72,7 +72,7 @@ public class UserBean implements Serializable {
         if((Boolean)CommandFactory.createCommand(CommandFactory.LOGIN, new UserDTO(username, password)).execute()){ //if login is successfull then
             currentUser = new UserDTO(username, password);
             loggedIn = true;
-            return "INSERT URL OF HOME PAGE";
+            return "index.xhtml";
         }else{
             //display incorrect login details error
             clear();

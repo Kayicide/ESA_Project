@@ -25,7 +25,7 @@ public class UserGateway extends GatewayAbstract {
         try {
             conn = database.getConnection();
             int addressID;
-            String[] address = new String[4];
+            String[] address = new String[5];
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM USER_INFO WHERE username = ?");
             stmt.setString(1, user.getUsername());
             ResultSet rs = stmt.executeQuery();
@@ -36,18 +36,19 @@ public class UserGateway extends GatewayAbstract {
                     user.setFirstName(rs.getString("SURNAME"));
                     user.setPassword(rs.getString("PASSWORD"));
                     addressID = rs.getInt("ADDRESS_ID");
-                    user.setAge(rs.getInt("AGE"));
-                    user.setPassportNumber(rs.getString("passportNumber"));
+                    user.setPassportNumber(rs.getString("PASSPORT_NUMBER"));
                     user.setIsAdmin(rs.getBoolean("ADMIN"));
                     
                     //gets the address information
                     stmt = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
                     stmt.setInt(1, addressID);
                     rs = stmt.executeQuery();
+                    rs.next();
                     address[0] = rs.getString("LINE1");
                     address[1] = rs.getString("LINE2");
                     address[2] = rs.getString("LINE3");
                     address[3] = rs.getString("LINE4");
+                    address[4] = rs.getString("LINE5");
                     user.setAddress(address);
                     
                     finishSQL(conn);

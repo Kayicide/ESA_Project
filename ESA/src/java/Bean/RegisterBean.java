@@ -25,7 +25,6 @@ public class RegisterBean {
     private String addressLine1, addressLine2,addressCity, addressCounty, addressPostcode;
     private String username, password, confirmPassword, firstname, surname, passportNumber;
     private String[] address;
-    private int age;
 
     public void setUsername(String username) {
         this.username = username;
@@ -83,9 +82,6 @@ public class RegisterBean {
        this.address = adr;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
@@ -133,9 +129,6 @@ public class RegisterBean {
         return address;
     }
 
-    public int getAge() {
-        return age;
-    }
 
     public String getPassportNumber() {
         return passportNumber;
@@ -158,7 +151,7 @@ public class RegisterBean {
                 //failed to encrypt password!
             }
 
-            if((Boolean)CommandFactory.createCommand(CommandFactory.REGISTER_USER, new UserDTO(username, password, firstname, surname, address, age, passportNumber, false)).execute()){
+            if((Boolean)CommandFactory.createCommand(CommandFactory.REGISTER_USER, new UserDTO(username, password, firstname, surname, address, passportNumber, false)).execute()){
                 return "/login"; //user has been registered so forward them to the login page!
             }else{
                 //display registation failed. Username may be taken or sql error!
