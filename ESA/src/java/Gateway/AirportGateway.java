@@ -29,14 +29,12 @@ public class AirportGateway extends GatewayAbstract {
         try
         {
             conn = database.getConnection();
-            
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO AIRPORT (AirportID, Name, Location, NoTerminla, NoGates) values (?,?,?,?,?)");
             stmt.setString(1, airport.getAirportID());
             stmt.setString(2, airport.getName());
             stmt.setString(3, airport.getLocation());
             stmt.setInt(4, airport.getNoTerminals());
-            stmt.setInt(4, airport.getNoGates());
+            stmt.setInt(5, airport.getNoGates());
             
             int rows = stmt.executeUpdate();
             added = rows == 1;
@@ -63,8 +61,8 @@ public class AirportGateway extends GatewayAbstract {
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM AIRPORT WHERE AirportID = ?");
             stmt.setString(1, id);
             
             int rows = stmt.executeUpdate();
@@ -91,8 +89,8 @@ public class AirportGateway extends GatewayAbstract {
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM AIRPORT"); 
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next())
@@ -126,8 +124,8 @@ public class AirportGateway extends GatewayAbstract {
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM AIRPORT WHERE AirportID = ?");
             stmt.setString(1, id); 
             
             ResultSet rs = stmt.executeQuery();

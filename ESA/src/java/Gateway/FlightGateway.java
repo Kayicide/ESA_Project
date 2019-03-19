@@ -29,8 +29,8 @@ public class FlightGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO FLIGHT (FlightID, Route, departureTime, status) values (?,?,?,?)");
             
             stmt.setInt(1, flight.getFlightID());
             RouteDTO route = flight.getRoute();
@@ -58,8 +58,8 @@ public class FlightGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM FLIGHT WHERE FlightID = ?");
             stmt.setInt(1, id);
             
             int rows = stmt.executeUpdate();
@@ -92,17 +92,14 @@ public class FlightGateway extends GatewayAbstract{
             while(rs.next())
             {
                 //unsure on how to go about added AirportDTOs for destinations so using null instead
-                RouteDTO route = new RouteDTO(rs.getInt("routeID"), null, null);
+               // RouteDTO route = new RouteDTO(rs.getInt("routeID"), null, null);
                 
                 //date to calendar
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("departureDateTime"));
+                RouteDTO route = new RouteDTO(rs.getInt("RouteID"),null,null);
+                FlightDTO flight = new FlightDTO(rs.getInt("flightID"),route,cal,rs.getString("status"));
                 
-                FlightDTO flight = new FlightDTO(
-                        rs.getInt("flightID"),
-                        route,
-                        cal,
-                        rs.getString("status"));
                 
                 flightList.add(flight);
             }

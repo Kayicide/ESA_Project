@@ -29,13 +29,11 @@ public class BookingGateway extends GatewayAbstract{
         try
         {
             conn = database.getConnection();
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO BOOKINGS (UserName, FightID) values (?,?)");
             
-            UserDTO user = booking.getUser();
-            FlightDTO flight = booking.getFlight();
-            stmt.setObject(1, user);
-            stmt.setObject(2, flight);
+            
+            stmt.setString(1, booking.getUser().getUsername());
+            stmt.setInt(2, booking.getFlight().getFlightID());
             //stmt.setDate(3, booking.getDateTimeBooked()); cannot use .setCalendar
             
             int rows = stmt.executeUpdate();
@@ -62,8 +60,7 @@ public class BookingGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM BOOKINGS WHERE ID = ?");
             stmt.setInt(1, id);
             
             int rows = stmt.executeUpdate();
@@ -89,21 +86,23 @@ public class BookingGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT Bookings, Users.UserName ,Users.fullname, Users.passportNumber,"
+                 + "Flight.FlightID, Flight.Status"
+                 + " FROM BOOKINGS JOIN Users on Bookings.UserName = Users.UserName"
+                 + " JOIN FLIGHT on Bookings.FlightID = Flight.FlightID"
+                 + " WHERE Bookings.UserName = ?");
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next())
             {
-                //UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, 0, rs.getString("passportNumber"), false);
-                FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
-                
-                //date to calendar
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("dateTimeBooked"));
-                
-                //BookingDTO booking = new BookingDTO(user, flight, cal);
-                //bookingList.add(booking);
+                UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, null, rs.getString("passportNumber"), false);
+                FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
+                BookingDTO booking = new BookingDTO(user, flight, cal);
+                bookingList.add(booking);               
+ 
             }
             
             rs.close();
@@ -121,30 +120,31 @@ public class BookingGateway extends GatewayAbstract{
     }
       
     public Object getByID(int id){
-        BookingDTO booking = new BookingDTO(null, null, null);
         
+        BookingDTO booking = null;
         try
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
-            //unsure on how we find booking by ID?
-            //stmt.setInt(1, id);
             
+            PreparedStatement stmt = conn.prepareStatement("SELECT Bookings.UserName ,Users.fullname, Users.passportNumber,"
+                 + "Flight.FlightID, Flight.Status"
+                 + " FROM BOOKINGS JOIN Users on Bookings.UserName = Users.UserName"
+                 + " JOIN FLIGHT on Bookings.FlightID = Flight.FlightID"
+                 + " WHERE Bookings.UserName = ?");
             ResultSet rs = stmt.executeQuery();
             
-            if(rs.next())
+            while (rs.next())
             {
-                //UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, 0, rs.getString("passportNumber"), false);
-                FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
-                
-                //date to calendar
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("dateTimeBooked"));
-                
-                //booking = new BookingDTO(user, flight, cal);
+                UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, null, rs.getString("passportNumber"), false);
+                FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
+                booking = new BookingDTO(user, flight, cal);
+                               
+ 
             }
+            
             
             rs.close();
             stmt.close();
