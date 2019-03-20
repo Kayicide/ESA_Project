@@ -27,8 +27,8 @@ public class RouteGateway extends GatewayAbstract{
         try
         {
             conn = database.getConnection();
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ROUTE (Destination,DepartureAirport, RouteID,  FightID) values (?,?)");
             
             AirportDTO destination = route.getDestination();
             AirportDTO departureAirport = route.getDepartureAirport();
@@ -58,8 +58,8 @@ public class RouteGateway extends GatewayAbstract{
         try
         {
             conn = database.getConnection();
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Planes WHERE ID = ?");
             
             stmt.setInt(1, id);
             
@@ -86,7 +86,9 @@ public class RouteGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("SELECT ROUTE.ID, Airport.AirportID ,Airport.destination"
+                 + " FROM ROUTE JOIN Airport on Route.AirportID = Airport.Airport"
+                 + " WHERE Route.RouteID = ?");
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next())
@@ -121,7 +123,9 @@ public class RouteGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("SELECT ROUTE.ID, Airport.AirportID ,Airport.destination"
+                 + " FROM ROUTE JOIN Airport on Route.AirportID = Airport.Airport"
+                 + " WHERE Route.RouteID = ?");
             stmt.setInt(1, id);
             
             ResultSet rs = stmt.executeQuery();

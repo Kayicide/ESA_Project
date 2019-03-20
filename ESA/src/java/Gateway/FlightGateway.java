@@ -86,15 +86,14 @@ public class FlightGateway extends GatewayAbstract{
             conn = database.getConnection();
             
             String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("SELECT Flight.flightID, Flight.status,Flight.departureDateTime,Route.RouteID"
+                 + " FROM FLIGHT JOIN ROUTE on Flight.flightID = Route.RouteID"
+                 + " WHERE Flight.FlightID = ?");
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next())
             {
-                //unsure on how to go about added AirportDTOs for destinations so using null instead
-               // RouteDTO route = new RouteDTO(rs.getInt("routeID"), null, null);
-                
-                //date to calendar
+
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("departureDateTime"));
                 RouteDTO route = new RouteDTO(rs.getInt("RouteID"),null,null);
@@ -126,25 +125,23 @@ public class FlightGateway extends GatewayAbstract{
             conn = database.getConnection();
             
             String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            PreparedStatement stmt = conn.prepareStatement("SELECT Flight.flightID, Flight.status,Flight.departureDateTime,Route.RouteID"
+                 + " FROM FLIGHT JOIN ROUTE on Flight.flightID = Route.RouteID"
+                 + " WHERE Flight.FlightID = ?");
             stmt.setInt(1, id); 
             
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next())
             {
-                //unsure on FlightDTOs so using null
-                RouteDTO route = new RouteDTO(rs.getInt("routeID"), null, null);
-                
+
                 //date to calendar
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("departureDateTime"));
                 
-                flight = new FlightDTO(
-                        rs.getInt("flightID"),
-                        route,
-                        cal,
-                        rs.getString("status"));
+                
+                RouteDTO route = new RouteDTO(rs.getInt("routeID"), null, null);
+                flight = new FlightDTO(rs.getInt("flightID"),route,cal,rs.getString("status"));
             }
             
             rs.close();

@@ -131,7 +131,7 @@ public class BookingGateway extends GatewayAbstract{
                  + "Flight.FlightID, Flight.Status"
                  + " FROM BOOKINGS JOIN Users on Bookings.UserName = Users.UserName"
                  + " JOIN FLIGHT on Bookings.FlightID = Flight.FlightID"
-                 + " WHERE Bookings.UserName = ?");
+                 + " WHERE Bookings.UserID = ?");
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next())

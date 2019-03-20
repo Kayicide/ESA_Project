@@ -112,16 +112,98 @@ public class UserGateway extends GatewayAbstract {
     }
         
     public boolean delete(int id){
+           boolean deleted = false;
+        
+        try
+        {
+            conn = database.getConnection();
+            
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM USERS WHERE ID = ?");
+            
+            stmt.setInt(1, id);
+            
+            int rows = stmt.executeUpdate();
+            deleted = rows == 1;
+            
+            stmt.close();
+            finishSQL(conn);
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            deleted = false;
+            finishSQL(conn);
+        }
+       
        return true; 
     }
         
     public ArrayList<Object> getAll(){
-        ArrayList<Object> userList = new ArrayList<>();
-        return userList;
+        ArrayList<Object> UserList = new ArrayList<>();
+        
+        try
+        {
+            conn = database.getConnection();
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT USER.UserName"
+                 + " FROM USER"
+                 + " WHERE User.UserName = ?");
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next())
+            {
+                UserDTO user = new UserDTO(rs.getString("UserName"),"","","",null,"",false);
+              
+                UserList.add(user);
+            }
+            
+            rs.close();
+            stmt.close();
+            finishSQL(conn);
+            
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            finishSQL(conn);
+        }
+        
+        return UserList;
     }
     
+    
     public Object getByID(int id){
-        UserDTO dto = new UserDTO(null);
-        return dto;
+        UserDTO user = new UserDTO(null);
+
+    try
+        {
+            conn = database.getConnection();
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT USER.UserName"
+                 + " FROM USER"
+                 + " WHERE User.UserName = ?");
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next())
+            {
+                 user = new UserDTO(rs.getString("UserName"),"","","",null,"",false);
+            }
+            
+            rs.close();
+            stmt.close();
+            finishSQL(conn);
+            
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            finishSQL(conn);
+        }
+        
+        return user;
+    
+        
     }
 }

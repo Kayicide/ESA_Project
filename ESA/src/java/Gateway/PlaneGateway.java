@@ -27,8 +27,8 @@ public class PlaneGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLANE (PlaneID, Capacity,NoCrew, PlaneModel) values (?,?,?,?)");
             stmt.setInt(1, plane.getPlaneID());
             stmt.setInt(2, plane.getCapacity());
             stmt.setInt(3, plane.getNoCrew());
@@ -57,8 +57,8 @@ public class PlaneGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+           
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Plane WHERE ID = ?");
             stmt.setInt(1, id);
             
             int rows = stmt.executeUpdate();
@@ -84,8 +84,8 @@ public class PlaneGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Planes");
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next())
@@ -118,8 +118,8 @@ public class PlaneGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             
-            String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement(sqlSt);
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Planes WHERE PlaneID = ?");
             stmt.setInt(1, id);
             
             ResultSet rs = stmt.executeQuery();
