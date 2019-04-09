@@ -24,8 +24,4 @@ public class FlightBean implements Serializable {
         ArrayList<Object> allFlights = flightManager.getAll();
         return allFlights;
     }
-    
-    
-    
-    
 }

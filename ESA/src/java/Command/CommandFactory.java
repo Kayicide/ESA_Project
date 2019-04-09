@@ -17,8 +17,8 @@ public class CommandFactory {
     //Basic
     public static final int REGISTER_USER = 1;
     public static final int LOGIN = 2;
-    public static final int VIEW_FLIGHTS = 3;
-    public static final int SEARCH_FLIGHTS = 4;
+    public static final int GET_ALL_FLIGHTS = 3;
+    public static final int GET_FLIGHT = 4;
 
     //User only
     public static final int BOOK_FLIGHT = 5;
@@ -33,6 +33,17 @@ public class CommandFactory {
 
     public static Command createCommand(int commandType) {
         switch (commandType) {
+            case GET_ALL_FLIGHTS:
+                return new GetAllFlights();
+            default:
+                return null;
+        }
+    }
+    
+    public static Command createCommand(int commandType, int id) {
+        switch (commandType) {
+            case GET_FLIGHT:
+                return new GetFlight(id);
             default:
                 return null;
         }
