@@ -117,7 +117,7 @@ public class FlightGateway extends GatewayAbstract{
         return flightList;
     }
     
-        public Object getByID(int id){
+    public Object getByID(int id){
         FlightDTO flight = new FlightDTO(id, null, null, null);
         
         try

@@ -5,6 +5,7 @@
  */
 package Command;
 
+import DTO.FlightDTO;
 import DTO.UserDTO;
 import Manager.ManagerFactory;
 
@@ -19,6 +20,8 @@ public class CommandFactory {
     public static final int LOGIN = 2;
     public static final int GET_ALL_FLIGHTS = 3;
     public static final int GET_FLIGHT = 4;
+    public static final int DELETE_FLIGHT = 12;
+    public static final int GET_ALL_ROUTES = 13;
 
     //User only
     public static final int BOOK_FLIGHT = 5;
@@ -35,6 +38,8 @@ public class CommandFactory {
         switch (commandType) {
             case GET_ALL_FLIGHTS:
                 return new GetAllFlights();
+            case GET_ALL_ROUTES:
+                return new GetAllRoutes();
             default:
                 return null;
         }
@@ -44,16 +49,28 @@ public class CommandFactory {
         switch (commandType) {
             case GET_FLIGHT:
                 return new GetFlight(id);
+            case DELETE_FLIGHT:
+                return new DeleteFlight(id);
             default:
                 return null;
         }
     }
+    
     public static Command createCommand(int commandType, UserDTO user) {
         switch (commandType) {
             case LOGIN:
                 return new Login(user);
             case REGISTER_USER:
                 return new Register(user);
+            default:
+                return null;
+        }
+    }
+    
+    public static Command createCommand(int commandType, FlightDTO flight) {
+        switch (commandType) {
+            case ADD_FLIGHT:
+                return new InsertFlight(flight);
             default:
                 return null;
         }
