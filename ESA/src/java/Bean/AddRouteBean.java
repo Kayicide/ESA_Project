@@ -54,6 +54,6 @@ public class AddRouteBean {
     public String addRoute(){
         RouteDTO route = new RouteDTO(new AirportDTO(airport1ID), new AirportDTO(airport2ID), new PlaneDTO(planeID));
         CommandFactory.createCommand(CommandFactory.ADD_ROUTE, route).execute();
-        return "home";
+        return "index.xhtml";
     }
 }

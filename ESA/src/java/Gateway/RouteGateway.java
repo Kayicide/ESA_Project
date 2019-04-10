@@ -21,23 +21,19 @@ public class RouteGateway extends GatewayAbstract{
  
     private Connection conn;
         
-    public boolean insert(RouteDTO route){
-        boolean added = false;
-        
+    public boolean insert(RouteDTO route){  
         try
         {
             conn = database.getConnection();
-            
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ROUTE (Destination,DepartureAirport, RouteID,  FightID) values (?,?)");
-            
-            AirportDTO destination = route.getDestination();
-            AirportDTO departureAirport = route.getDepartureAirport();
-            stmt.setInt(1, route.getRouteID());
-            stmt.setObject(2, destination);
-            stmt.setObject(3, departureAirport);
-            
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ROUTE (STARTING_AIRPORT_ID, FINISHING_AIRPORT_ID, PLANE_ID) values (?,?, ?)");
+            stmt.setString(1, route.getDepartureAirport().getAirportID());
+            stmt.setString(2, route.getDestination().getAirportID());
+            stmt.setInt(3, route.getPlane().getPlaneID());
             int rows = stmt.executeUpdate();
-            added = rows == 1;
+            if(rows == 0){
+                System.out.println("Added failed, no exception?");
+                return false;
+            }
             
             stmt.close();
             finishSQL(conn);
@@ -45,8 +41,8 @@ public class RouteGateway extends GatewayAbstract{
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            added = false;
             finishSQL(conn);
+            return false;
         }
         
         return true;  
@@ -98,7 +94,8 @@ public class RouteGateway extends GatewayAbstract{
                 RouteDTO route = new RouteDTO(
                         rs.getInt("routeID"),
                         destination,
-                        departureAirport);
+                        departureAirport,
+                        null); //not working yet
                 routeList.add(route);
             }
             
@@ -117,7 +114,7 @@ public class RouteGateway extends GatewayAbstract{
     }
     
     public Object getByID(int id){
-        RouteDTO route = new RouteDTO(id, null, null);
+        RouteDTO route = new RouteDTO(id, null, null, null);
         
         try
         {
@@ -137,7 +134,7 @@ public class RouteGateway extends GatewayAbstract{
                 route = new RouteDTO(
                         rs.getInt("routeID"),
                         destination,
-                        departureAirport);
+                        departureAirport, null);
             }
             
             rs.close();

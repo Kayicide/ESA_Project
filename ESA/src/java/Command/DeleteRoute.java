@@ -5,10 +5,22 @@
  */
 package Command;
 
+import Manager.RouteManager;
+
 /**
  *
  * @author Kayde
  */
-public class DeleteRoute {
+public class DeleteRoute implements Command{
+    private final int id;
+    private RouteManager manager = new RouteManager();
+    public DeleteRoute(int id){
+        this.id = id;
+    }
+
+    @Override
+    public Object execute() {
+        return manager.delete(id);
+    }
     
 }

@@ -84,7 +84,8 @@ public class AirportGateway extends GatewayAbstract {
 
     public ArrayList<Object> getAll() {
         ArrayList<Object> airportList = new ArrayList<>();
-        
+            int addressID;
+            String[] address = new String[5];
         try
         {
             conn = database.getConnection();
@@ -96,11 +97,26 @@ public class AirportGateway extends GatewayAbstract {
             while (rs.next())
             {
                 AirportDTO airport = new AirportDTO(
-                        rs.getString("airportID"),
-                        rs.getString("name"),
-                        rs.getString("location"),
-                        rs.getInt("noTerminals"),
-                        rs.getInt("noGates"));
+                    rs.getString("ID"),
+                    rs.getString("NAME"),
+                    rs.getInt("TERMINALS"),
+                    rs.getInt("GATES")
+                );
+                addressID = rs.getInt("ADDRESS_ID");
+                    
+                //gets the address information
+                PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
+                stmt2.setInt(1, addressID);
+                ResultSet rs2 = stmt2.executeQuery();
+                rs2.next();
+                address[0] = rs2.getString("LINE1");
+                address[1] = rs2.getString("LINE2");
+                address[2] = rs2.getString("LINE3");
+                address[3] = rs2.getString("LINE4");
+                address[4] = rs2.getString("LINE5");
+                airport.setLocation(address);
+                rs2.close();
+                
                 airportList.add(airport);
             }
             
@@ -113,7 +129,10 @@ public class AirportGateway extends GatewayAbstract {
             ex.printStackTrace();
             finishSQL(conn);
         }
-        
+        for(Object a: airportList){
+            System.out.println(((AirportDTO) a).getName());
+        }
+        System.out.println(airportList.size());
         return airportList;
     }
 

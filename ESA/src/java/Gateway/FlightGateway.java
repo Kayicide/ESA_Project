@@ -35,7 +35,7 @@ public class FlightGateway extends GatewayAbstract{
             stmt.setInt(1, flight.getFlightID());
             RouteDTO route = flight.getRoute();
             stmt.setObject(2, route);
-            //stmt.setCalendar(3, flight.getDepartureDateTime()); *should i use stmt.setDate()?
+            //stmt.setCalendar(3, flight.getDepartureDateTime()); //*should i use stmt.setDate()?
             stmt.setString(4, flight.getStatus());
             
             stmt.close();
@@ -96,7 +96,7 @@ public class FlightGateway extends GatewayAbstract{
 
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("departureDateTime"));
-                RouteDTO route = new RouteDTO(rs.getInt("RouteID"),null,null);
+                RouteDTO route = new RouteDTO(rs.getInt("RouteID"));
                 FlightDTO flight = new FlightDTO(rs.getInt("flightID"),route,cal,rs.getString("status"));
                 
                 
@@ -140,7 +140,7 @@ public class FlightGateway extends GatewayAbstract{
                 cal.setTime(rs.getDate("departureDateTime"));
                 
                 
-                RouteDTO route = new RouteDTO(rs.getInt("routeID"), null, null);
+                RouteDTO route = new RouteDTO(rs.getInt("routeID"));
                 flight = new FlightDTO(rs.getInt("flightID"),route,cal,rs.getString("status"));
             }
             

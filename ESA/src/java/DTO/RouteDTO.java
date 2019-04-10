@@ -21,6 +21,13 @@ public class RouteDTO {
         this.plane = plane;
     }
     
+    public RouteDTO(AirportDTO destination, AirportDTO departureAirport, PlaneDTO plane){
+        this.routeID = routeID;
+        this.destination = destination;
+        this.departureAirport = departureAirport;
+        this.plane = plane;
+    }
+    
     public RouteDTO(int routeID){
         this.routeID = routeID;
     }

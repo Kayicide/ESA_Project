@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>New Route!</title>
+    </h:head>
+    <h:body>
+         <ui:composition template = "templates/common.xhtml">
+            <ui:define name="content">
+                <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
+                    <h2>Create an account</h2>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <p><b>Departing From:</b></p>
+                            <h:selectOneMenu value="#{addRouteBean.airport1ID}" required="true" requiredMessage="Please enter an airport!">
+                                <f:selectItems value="#{airportBean.allAirports}" var="airport" itemLabel="#{airport.name}" itemValue="#{airport.airportID}" />
+                            </h:selectOneMenu>
+                            <p><b>Destination:</b></p>
+                            <h:selectOneMenu value="#{addRouteBean.airport2ID}" required="true" requiredMessage="Please enter an airport!">
+                                <f:selectItems value="#{airportBean.allAirports}" var="airport2" itemLabel="#{airport2.name}" itemValue="#{airport2.airportID}" />
+                            </h:selectOneMenu>
+                            <p><b>Plane:</b></p>
+                            <h:selectOneMenu value="#{addRouteBean.planeID}" required="true" requiredMessage="Please enter an airport!">
+                                    <f:selectItems value="#{planeBean.allPlanes}" var="plane" itemLabel="#{plane.planeModel}" itemValue="#{plane.planeID}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandButton value="Submit" action="#{addRouteBean.addRoute()}" />
+                    </h:form>
+                </div>
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>

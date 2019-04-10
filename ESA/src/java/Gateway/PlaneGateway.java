@@ -85,16 +85,16 @@ public class PlaneGateway extends GatewayAbstract{
             conn = database.getConnection();
             
             
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Planes");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLANE");
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next())
             {
                 PlaneDTO plane = new PlaneDTO(
-                        rs.getInt("planeID"),
-                        rs.getString("planeModel"),
-                        rs.getInt("capacity"),
-                        rs.getInt("noCrew"));
+                        rs.getInt("ID"),
+                        rs.getString("TYPE"),
+                        rs.getInt("CAPACITY"),
+                        rs.getInt("CREW"));
                 PlaneList.add(plane);
             }
             rs.close();
@@ -119,7 +119,7 @@ public class PlaneGateway extends GatewayAbstract{
             conn = database.getConnection();
             
             
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Planes WHERE PlaneID = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLANE WHERE PlaneID = ?");
             stmt.setInt(1, id);
             
             ResultSet rs = stmt.executeQuery();
@@ -127,10 +127,10 @@ public class PlaneGateway extends GatewayAbstract{
             if(rs.next())
             {
                 plane = new PlaneDTO(
-                        rs.getInt("planeId"),
-                        rs.getString("planeModel"),
-                        rs.getInt("capacity"),
-                        rs.getInt("noCrew"));
+                        rs.getInt("ID"),
+                        rs.getString("TYPE"),
+                        rs.getInt("CAPACITY"),
+                        rs.getInt("CREW"));
             }
             
             rs.close();

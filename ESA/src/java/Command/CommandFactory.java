@@ -30,6 +30,13 @@ public class CommandFactory {
     public static final int GET_ALL_ROUTES = 7;
     public static final int GET_ROUTE = 8;
     public static final int ADD_ROUTE = 9;
+    public static final int DELETE_ROUTE = 10;
+    
+    //Airport
+    public static final int GET_ALL_AIRPORTS = 11;
+    
+    //Plane
+    public static final int GET_ALL_PLANES = 12;
 
     public static Command createCommand(int commandType) {
         switch (commandType) {
@@ -37,6 +44,10 @@ public class CommandFactory {
                 return new GetAllFlights();
             case GET_ALL_ROUTES:
                 return new GetAllRoutes();
+            case GET_ALL_PLANES:
+                return new GetAllPlanes();
+            case GET_ALL_AIRPORTS:
+                return new GetAllAirports();
             default:
                 return null;
         }

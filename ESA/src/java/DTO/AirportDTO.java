@@ -11,16 +11,20 @@ package DTO;
  */
 public class AirportDTO {
     private String airportID; //Example: LHR for Heathrow
-    private String name, location;
+    private String name;
+    private String[] location;
     private int noTerminals;
     private int noGates;
     
-    public AirportDTO(String airportID, String name, String location, int noTerminals, int noGates){
+    public AirportDTO(String airportID, String name, int noTerminals, int noGates){
         this.airportID = airportID;
         this.name = name;
-        this.location = location;
         this.noTerminals = noTerminals;
         this.noGates = noGates;
+    }
+    
+    public AirportDTO(String airportID){
+        this.airportID = airportID;
     }
 
     public String getAirportID() {
@@ -31,7 +35,7 @@ public class AirportDTO {
         return name;
     }
 
-    public String getLocation() {
+    public String[] getLocation() {
         return location;
     }
 
@@ -51,7 +55,7 @@ public class AirportDTO {
         this.name = name;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(String[] location) {
         this.location = location;
     }
 

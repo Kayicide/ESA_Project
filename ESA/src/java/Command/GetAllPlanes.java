@@ -5,21 +5,16 @@
  */
 package Command;
 
-import Manager.RouteManager;
+import Manager.PlaneManager;
 
 /**
  *
  * @author Kayde
  */
-public class GetRoute implements Command{
-    private final int id;
-    RouteManager manager = new RouteManager();
-    public GetRoute(int id){
-        this.id = id;
-    }
-
+public class GetAllPlanes implements Command{
+    PlaneManager manager = new PlaneManager();
     @Override
     public Object execute() {
-        return manager.getById(id);
+        return manager.getAll();
     }
 }

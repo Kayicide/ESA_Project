@@ -2,23 +2,17 @@
 package Bean;
 
 import Command.CommandFactory;
-import static Command.CommandFactory.DELETE_FLIGHT;
 import DTO.FlightDTO;
-import Manager.FlightManager;
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named(value = "flightBean")
-@RequestScoped
+@SessionScoped
 public class FlightBean implements Serializable {
-    
-    private FlightManager flightManager = new FlightManager();
-    private FlightDTO flightdetails = null;
-    
-    public FlightDTO getFlightDetails(){
-        return flightdetails;
+    public FlightDTO getFlightDetails(int id){
+        return (FlightDTO)CommandFactory.createCommand(CommandFactory.GET_FLIGHT, id).execute();
     }
         
     public ArrayList<FlightDTO>getAllFlights(){
