@@ -7,6 +7,7 @@ package Gateway;
 
 import DTO.RouteDTO;
 import DTO.AirportDTO;
+import DTO.PlaneDTO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -54,8 +55,6 @@ public class RouteGateway extends GatewayAbstract{
             finishSQL(conn);
             return false;
         }
-        
-        return true;  
     }
      
     public boolean delete(int id){
@@ -87,26 +86,60 @@ public class RouteGateway extends GatewayAbstract{
        
     public ArrayList<Object> getAll(){
         ArrayList<Object> routeList = new ArrayList<>();
-        
+        String[] address = new String[5];
         try
         {
             conn = database.getConnection();
             String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement("SELECT ROUTE.ID, Airport.AirportID ,Airport.destination"
-                 + " FROM ROUTE JOIN Airport on Route.AirportID = Airport.Airport"
-                 + " WHERE Route.RouteID = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Route.ID, Plane.ID as PlaneID, Plane.\"TYPE\", Plane.CAPACITY, Plane.CREW, a.ID as aID, a.\"NAME\" as aNAME, a.ADDRESS_ID as aAddress_ID, a.TERMINALS as aTERMINALS, a.GATES as aGATES, b.ID as bID, b.\"NAME\" as bNAME, b.ADDRESS_ID as bADDRESS_ID, b.TERMINALS as bTERMINALS, b.GATES as bGATES FROM ROUTE"
+                    + " JOIN Airport a on STARTING_AIRPORT_ID = a.ID"
+                    + " JOIN Airport b on FINISHING_AIRPORT_ID = b.ID"
+                    + " JOIN Plane on Route.PLANE_ID = Plane.ID");
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next())
             {
-                AirportDTO destination = new AirportDTO(rs.getString("airportID"), null, rs.getString("destination"), 0, 0);
-                AirportDTO departureAirport = new AirportDTO(rs.getString("airportID"), null, rs.getString("destination"), 0, 0);
+                int addressid;
+                AirportDTO departureAirport = new AirportDTO(rs.getString("aID"), rs.getString("aNAME"), rs.getInt("aTERMINALS"), rs.getInt("aGATES"));
+                AirportDTO destination = new AirportDTO(rs.getString("bID"), rs.getString("bNAME"), rs.getInt("bTERMINALS"), rs.getInt("bGATES"));
+                
+                //Airport1 Address
+                addressid = rs.getInt("aADDRESS_ID");
+                PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
+                stmt2.setInt(1, addressid);
+                ResultSet rs2 = stmt2.executeQuery();
+                rs2.next();
+                address[0] = rs2.getString("LINE1");
+                address[1] = rs2.getString("LINE2");
+                address[2] = rs2.getString("LINE3");
+                address[3] = rs2.getString("LINE4");
+                address[4] = rs2.getString("LINE5");
+                departureAirport.setLocation(address);
+                rs2.close();
+                
+                //Airport2 Address
+                addressid = rs.getInt("bADDRESS_ID");
+                PreparedStatement stmt3 = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
+                stmt3.setInt(1, addressid);
+                ResultSet rs3 = stmt3.executeQuery();
+                rs3.next();
+                address[0] = rs3.getString("LINE1");
+                address[1] = rs3.getString("LINE2");
+                address[2] = rs3.getString("LINE3");
+                address[3] = rs3.getString("LINE4");
+                address[4] = rs3.getString("LINE5");
+                destination.setLocation(address);
+                rs3.close();
+                
+                PlaneDTO plane = new PlaneDTO(rs.getInt("PlaneID"), rs.getString("TYPE"), rs.getInt("CAPACITY"), rs.getInt("CREW"));
                 RouteDTO route = new RouteDTO(
-                        rs.getInt("routeID"),
-                        destination,
+                        rs.getInt("ID"),
                         departureAirport,
-                        null); //not working yet
+                        destination,
+                        plane);
                 routeList.add(route);
+                
+                System.out.println("Line2 of airport departure airport " + route.getDepartureAirport().getLocation()[2]);
             }
             
             rs.close();
