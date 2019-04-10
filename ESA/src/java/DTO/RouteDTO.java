@@ -18,6 +18,10 @@ public class RouteDTO {
         this.destination = destination;
         this.departureAirport = departureAirport;
     }
+    
+    public RouteDTO(int routeID){
+        this.routeID = routeID;
+    }
 
     public int getRouteID() {
         return routeID;

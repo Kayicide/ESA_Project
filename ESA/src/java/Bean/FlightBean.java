@@ -22,10 +22,10 @@ public class FlightBean implements Serializable {
     }
         
     public ArrayList<FlightDTO>getAllFlights(){
-        return (ArrayList<FlightDTO>)CommandFactory.createCommand(Factory.GET_ALL_FLIGHTS).execute();
+        return (ArrayList<FlightDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_FLIGHTS).execute();
     }
     
     public void deleteFlight(int id){
-        CommandFactory.createCommand(Factory.DELETE_FLIGHT, id).execute();
+        CommandFactory.createCommand(CommandFactory.DELETE_FLIGHT, id).execute();
     }
 }

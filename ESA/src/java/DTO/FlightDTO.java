@@ -23,6 +23,12 @@ public class FlightDTO {
         this.departureDateTime = departureDateTime;
         this.status = status;
     }
+    public FlightDTO(RouteDTO route, Calendar departureDateTime, String status){
+        this.flightID = flightID;
+        this.route = route;
+        this.departureDateTime = departureDateTime;
+        this.status = status;
+    }
 
     public int getFlightID() {
         return flightID;
