@@ -6,6 +6,7 @@
 package Command;
 
 import DTO.FlightDTO;
+import DTO.RouteDTO;
 import DTO.UserDTO;
 import Manager.ManagerFactory;
 
@@ -15,24 +16,20 @@ import Manager.ManagerFactory;
  */
 public class CommandFactory {
     static final ManagerFactory managerFactory = new ManagerFactory();
-    //Basic
+    //Login/Register
     public static final int REGISTER_USER = 1;
     public static final int LOGIN = 2;
+    
+    //Flight
     public static final int GET_ALL_FLIGHTS = 3;
     public static final int GET_FLIGHT = 4;
-    public static final int DELETE_FLIGHT = 12;
-    public static final int GET_ALL_ROUTES = 13;
-
-    //User only
-    public static final int BOOK_FLIGHT = 5;
-    public static final int UPDATE_BOOKING = 6;
-    public static final int CANCEL_FLIGHT = 7;
-    public static final int VIEW_BOOKINGS = 8;
-
-    //Admin only
-    public static final int VIEW_USERS = 9;
-    public static final int SEARCH_USERS = 10;
-    public static final int ADD_FLIGHT = 11;
+    public static final int ADD_FLIGHT = 5;
+    public static final int DELETE_FLIGHT = 6;
+    
+    //Route
+    public static final int GET_ALL_ROUTES = 7;
+    public static final int GET_ROUTE = 8;
+    public static final int ADD_ROUTE = 9;
 
     public static Command createCommand(int commandType) {
         switch (commandType) {
@@ -51,6 +48,8 @@ public class CommandFactory {
                 return new GetFlight(id);
             case DELETE_FLIGHT:
                 return new DeleteFlight(id);
+            case GET_ROUTE:
+                return new GetRoute(id);
             default:
                 return null;
         }
@@ -71,6 +70,14 @@ public class CommandFactory {
         switch (commandType) {
             case ADD_FLIGHT:
                 return new InsertFlight(flight);
+            default:
+                return null;
+        }
+    }
+    public static Command createCommand(int commandType, RouteDTO route) {
+        switch (commandType) {
+            case ADD_ROUTE:
+                return new InsertRoute(route);
             default:
                 return null;
         }
