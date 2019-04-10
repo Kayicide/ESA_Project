@@ -25,18 +25,28 @@ public class RouteGateway extends GatewayAbstract{
         try
         {
             conn = database.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ROUTE (STARTING_AIRPORT_ID, FINISHING_AIRPORT_ID, PLANE_ID) values (?,?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ROUTE WHERE STARTING_AIRPORT_ID = ? AND FINISHING_AIRPORT_ID = ? AND PLANE_ID = ?");
             stmt.setString(1, route.getDepartureAirport().getAirportID());
             stmt.setString(2, route.getDestination().getAirportID());
             stmt.setInt(3, route.getPlane().getPlaneID());
-            int rows = stmt.executeUpdate();
-            if(rows == 0){
-                System.out.println("Added failed, no exception?");
+            ResultSet rs = stmt.executeQuery();
+            if(!rs.next()){
+                stmt = conn.prepareStatement("INSERT INTO ROUTE (STARTING_AIRPORT_ID, FINISHING_AIRPORT_ID, PLANE_ID) values (?,?, ?)");
+                stmt.setString(1, route.getDepartureAirport().getAirportID());
+                stmt.setString(2, route.getDestination().getAirportID());
+                stmt.setInt(3, route.getPlane().getPlaneID());
+                int rows = stmt.executeUpdate();
+                if(rows == 0){
+                    System.out.println("Added failed, no exception?");
+                    return false;
+                }  
+            }else{
+                //duplicate
                 return false;
             }
-            
             stmt.close();
             finishSQL(conn);
+            return true;
         }
         catch(SQLException ex)
         {

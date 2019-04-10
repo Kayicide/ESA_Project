@@ -10,6 +10,8 @@ import DTO.AirportDTO;
 import DTO.PlaneDTO;
 import DTO.RouteDTO;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -52,8 +54,16 @@ public class AddRouteBean {
     }
     
     public String addRoute(){
-        RouteDTO route = new RouteDTO(new AirportDTO(airport1ID), new AirportDTO(airport2ID), new PlaneDTO(planeID));
-        CommandFactory.createCommand(CommandFactory.ADD_ROUTE, route).execute();
-        return "index.xhtml";
+        
+        if(airport1ID.equals(airport2ID)){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Departure Airport and Destination Airport cannot be the same!")); 
+        }else{
+            RouteDTO route = new RouteDTO(new AirportDTO(airport1ID), new AirportDTO(airport2ID), new PlaneDTO(planeID));
+            if((Boolean)CommandFactory.createCommand(CommandFactory.ADD_ROUTE, route).execute()){ 
+                return "index.xhtml";
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Route Already Exists!")); 
+        }
+        return "addroute.xhtml";
     }
 }
