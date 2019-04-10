@@ -5,10 +5,22 @@
  */
 package Command;
 
+import DTO.RouteDTO;
+import Manager.RouteManager;
+
 /**
  *
  * @author Kayde
  */
-public class InsertRoute {
+public class InsertRoute implements Command{
+    private RouteDTO route;
+    private RouteManager manager = new RouteManager();
+    public InsertRoute(RouteDTO route){
+        this.route = route;
+    }
+    @Override
+    public Object execute() {
+        return manager.add(route);
+    }
     
 }

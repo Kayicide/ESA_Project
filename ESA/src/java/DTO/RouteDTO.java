@@ -13,10 +13,12 @@ public class RouteDTO {
     private int routeID;
     private AirportDTO destination;
     private AirportDTO departureAirport;
-    public RouteDTO(int routeID, AirportDTO destination, AirportDTO departureAirport){
+    private PlaneDTO plane;
+    public RouteDTO(int routeID, AirportDTO destination, AirportDTO departureAirport, PlaneDTO plane){
         this.routeID = routeID;
         this.destination = destination;
         this.departureAirport = departureAirport;
+        this.plane = plane;
     }
     
     public RouteDTO(int routeID){
@@ -46,4 +48,13 @@ public class RouteDTO {
     public void setDepartureAirport(AirportDTO departureAirport) {
         this.departureAirport = departureAirport;
     }
+
+    public PlaneDTO getPlane() {
+        return plane;
+    }
+
+    public void setPlane(PlaneDTO plane) {
+        this.plane = plane;
+    }
+    
 }

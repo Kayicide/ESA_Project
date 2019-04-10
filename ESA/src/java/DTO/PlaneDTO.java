@@ -18,6 +18,11 @@ public class PlaneDTO {
         this.Capacity = Capacity;
         this.noCrew = noCrew;
     }
+    
+    public PlaneDTO(int PlaneID){
+        this.PlaneID = PlaneID;
+
+    }
 
     public String getPlaneModel() {
         return planeModel;
