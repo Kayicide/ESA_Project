@@ -99,37 +99,13 @@ public class RouteGateway extends GatewayAbstract{
             
             while(rs.next())
             {
-                int addressid;
                 AirportDTO departureAirport = new AirportDTO(rs.getString("aID"), rs.getString("aNAME"), rs.getInt("aTERMINALS"), rs.getInt("aGATES"));
                 AirportDTO destination = new AirportDTO(rs.getString("bID"), rs.getString("bNAME"), rs.getInt("bTERMINALS"), rs.getInt("bGATES"));
                 
-                //Airport1 Address
-                addressid = rs.getInt("aADDRESS_ID");
-                PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
-                stmt2.setInt(1, addressid);
-                ResultSet rs2 = stmt2.executeQuery();
-                rs2.next();
-                address[0] = rs2.getString("LINE1");
-                address[1] = rs2.getString("LINE2");
-                address[2] = rs2.getString("LINE3");
-                address[3] = rs2.getString("LINE4");
-                address[4] = rs2.getString("LINE5");
-                departureAirport.setLocation(address);
-                rs2.close();
-                
-                //Airport2 Address
-                addressid = rs.getInt("bADDRESS_ID");
-                PreparedStatement stmt3 = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
-                stmt3.setInt(1, addressid);
-                ResultSet rs3 = stmt3.executeQuery();
-                rs3.next();
-                address[0] = rs3.getString("LINE1");
-                address[1] = rs3.getString("LINE2");
-                address[2] = rs3.getString("LINE3");
-                address[3] = rs3.getString("LINE4");
-                address[4] = rs3.getString("LINE5");
-                destination.setLocation(address);
-                rs3.close();
+                //Airport Address
+                departureAirport.setLocation(getAddress(rs.getInt("aADDRESS_ID")));
+                destination.setLocation(getAddress(rs.getInt("bADDRESS_ID")));
+
                 
                 PlaneDTO plane = new PlaneDTO(rs.getInt("PlaneID"), rs.getString("TYPE"), rs.getInt("CAPACITY"), rs.getInt("CREW"));
                 RouteDTO route = new RouteDTO(

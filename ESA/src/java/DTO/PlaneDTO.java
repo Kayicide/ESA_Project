@@ -19,6 +19,12 @@ public class PlaneDTO {
         this.noCrew = noCrew;
     }
     
+    public PlaneDTO(String planeModel, int Capacity, int noCrew){
+        this.planeModel = planeModel;
+        this.Capacity = Capacity;
+        this.noCrew = noCrew;
+    }
+    
     public PlaneDTO(int PlaneID){
         this.PlaneID = PlaneID;
 

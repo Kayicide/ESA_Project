@@ -6,6 +6,7 @@
 package Command;
 
 import DTO.FlightDTO;
+import DTO.PlaneDTO;
 import DTO.RouteDTO;
 import DTO.UserDTO;
 import Manager.ManagerFactory;
@@ -37,6 +38,8 @@ public class CommandFactory {
     
     //Plane
     public static final int GET_ALL_PLANES = 12;
+    public static final int ADD_PLANE = 13;
+    public static final int DELETE_PLANE = 14;
 
     public static Command createCommand(int commandType) {
         switch (commandType) {
@@ -61,6 +64,8 @@ public class CommandFactory {
                 return new DeleteFlight(id);
             case GET_ROUTE:
                 return new GetRoute(id);
+            case DELETE_PLANE:
+                return new DeletePlane(id);
             default:
                 return null;
         }
@@ -89,6 +94,14 @@ public class CommandFactory {
         switch (commandType) {
             case ADD_ROUTE:
                 return new InsertRoute(route);
+            default:
+                return null;
+        }
+    }
+    public static Command createCommand(int commandType, PlaneDTO plane) {
+        switch (commandType) {
+            case ADD_PLANE:
+                return new InsertPlane(plane);
             default:
                 return null;
         }

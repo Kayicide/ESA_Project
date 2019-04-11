@@ -22,4 +22,8 @@ public class PlaneBean {
     public ArrayList<PlaneDTO>getAllPlanes(){
         return (ArrayList<PlaneDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_PLANES).execute();
     }
+    
+    public void deletePlane(int id){
+        CommandFactory.createCommand(CommandFactory.DELETE_PLANE, id).execute();
+    }
 }

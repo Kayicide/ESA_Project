@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">    
+    
+    <h:head>
+        <title>User Registration</title>
+    </h:head>
+    <h:body>
+         <ui:composition template = "templates/common.xhtml">
+            <ui:define name="content">
+                <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
+                    <h2>Create an account</h2>
+                    <div class="registerForm">
+                        <h:form>
+                            <h3>Account Details </h3>
+                            <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
+                            <h:outputText value="Type: "/>
+                            <h:inputText value="#{addPlaneBean.planeModel}"/>
+                            <h:outputText value="Capacity: "/>
+                            <h:inputText value="#{addPlaneBean.capacity}" converterMessage="Please enter digits only." />
+                            <h:outputText value="Crew Number: "/>
+                            <h:inputText value="#{addPlaneBean.noCrew}" converterMessage="Please enter digits only." />
+                            </h:panelGrid>
+                            <h:commandButton value="Submit" action="#{addPlaneBean.addPlane()}" />
+                    </h:form>
+                    </div>
+                </div>
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>

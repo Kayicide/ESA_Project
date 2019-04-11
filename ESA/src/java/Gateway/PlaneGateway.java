@@ -21,21 +21,19 @@ public class PlaneGateway extends GatewayAbstract{
     private Connection conn;
        
     public boolean insert(PlaneDTO plane){
-        boolean added = false;
-        
         try
         {
             conn = database.getConnection();
             
-            
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLANE (PlaneID, Capacity,NoCrew, PlaneModel) values (?,?,?,?)");
-            stmt.setInt(1, plane.getPlaneID());
-            stmt.setInt(2, plane.getCapacity());
-            stmt.setInt(3, plane.getNoCrew());
-            stmt.setString(4, plane.getPlaneModel());
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLANE (CAPACITY, CREW, TYPE) values (?,?,?)");
+            stmt.setInt(1, plane.getCapacity());
+            stmt.setInt(2, plane.getNoCrew());
+            stmt.setString(3, plane.getPlaneModel());
             
             int rows = stmt.executeUpdate();
-            added = rows == 1;
+            if(rows == 0){
+                return false;
+            }
             
             stmt.close();
             finishSQL(conn);
@@ -43,26 +41,26 @@ public class PlaneGateway extends GatewayAbstract{
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            added = false;
             finishSQL(conn);
+            return false;
         }
         
-        return added;  
+        return true;  
     }
      
     public boolean delete(int id){
-        boolean deleted = false;
-        
         try
         {
             conn = database.getConnection();
             
            
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Plane WHERE ID = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM PLANE WHERE ID = ?");
             stmt.setInt(1, id);
             
             int rows = stmt.executeUpdate();
-            deleted = rows == 1;
+            if(rows == 0){
+                return false;
+            }
             
             stmt.close();
             finishSQL(conn);
@@ -70,11 +68,11 @@ public class PlaneGateway extends GatewayAbstract{
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            deleted = false;
             finishSQL(conn);
+            return false;
         }
         
-       return deleted; 
+       return true;
     }
         
     public ArrayList<Object> getAll(){
@@ -112,14 +110,14 @@ public class PlaneGateway extends GatewayAbstract{
     }
     
     public Object getByID(int id){
-        PlaneDTO plane = new PlaneDTO(id, null, id, id);
+        PlaneDTO plane = null;
         
         try
         {
             conn = database.getConnection();
             
             
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLANE WHERE PlaneID = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLANE WHERE ID = ?");
             stmt.setInt(1, id);
             
             ResultSet rs = stmt.executeQuery();
@@ -135,8 +133,8 @@ public class PlaneGateway extends GatewayAbstract{
             
             rs.close();
             stmt.close();
-            finishSQL(conn);
-            
+            finishSQL(conn); 
+            return plane;
         }
         catch(SQLException ex)
         {
@@ -144,7 +142,7 @@ public class PlaneGateway extends GatewayAbstract{
             finishSQL(conn);
         }
         
-        return plane;
+        return null;
     }
     
 }
