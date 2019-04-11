@@ -49,6 +49,7 @@
                         
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Delete" action="${airportBean.deleteAirport(airport.airportID)}"/>
                         </h:column>
                     </h:dataTable>
                     <h:commandButton value="Add" action="addroute.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>

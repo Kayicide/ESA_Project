@@ -21,4 +21,8 @@ public class AirportBean {
     public ArrayList<AirportDTO>getAllAirports(){
         return (ArrayList<AirportDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_AIRPORTS).execute();
     }
+    
+    public void deleteAirport(String id){
+        CommandFactory.createCommand(CommandFactory.DELETE_AIRPORT, id).execute(); 
+    }
 }

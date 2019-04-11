@@ -74,9 +74,20 @@ public class AirportGateway extends GatewayAbstract {
         try
         {
             conn = database.getConnection();
-            
-            
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM AIRPORT WHERE AirportID = ?");
+            //Chain of deletes
+            PreparedStatement stmt3 = conn.prepareStatement("DELETE FROM BOOKING WHERE FLIGHT_ID IN (SELECT ID FROM Flight WHERE ROUTE_ID IN (SELECT ID from Route WHERE STARTING_AIRPORT_ID = ? OR FINISHING_AIRPORT_ID = ?))");
+            stmt3.setString(1, id);
+            stmt3.setString(2, id);
+            stmt3.executeUpdate();
+            PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM Flight WHERE ROUTE_ID IN (SELECT ID from Route WHERE STARTING_AIRPORT_ID = ? OR FINISHING_AIRPORT_ID = ?)");
+            stmt2.setString(1, id);
+            stmt2.setString(2, id);
+            stmt2.executeUpdate();
+            PreparedStatement stmt1 = conn.prepareStatement("DELETE FROM ROUTE WHERE STARTING_AIRPORT_ID = ? OR FINISHING_AIRPORT_ID = ?");
+            stmt1.setString(1, id);
+            stmt1.setString(2, id);
+            stmt1.executeUpdate();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM AIRPORT WHERE ID = ?");
             stmt.setString(1, id);
             
             int rows = stmt.executeUpdate();
@@ -98,8 +109,6 @@ public class AirportGateway extends GatewayAbstract {
 
     public ArrayList<Object> getAll() {
         ArrayList<Object> airportList = new ArrayList<>();
-            int addressID;
-            String[] address = new String[5];
         try
         {
             conn = database.getConnection();
@@ -116,21 +125,8 @@ public class AirportGateway extends GatewayAbstract {
                     rs.getInt("TERMINALS"),
                     rs.getInt("GATES")
                 );
-                addressID = rs.getInt("ADDRESS_ID");
+                airport.setLocation(getAddress(rs.getInt("ADDRESS_ID")));
                     
-                //gets the address information
-                PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM ADDRESS WHERE ID = ?");
-                stmt2.setInt(1, addressID);
-                ResultSet rs2 = stmt2.executeQuery();
-                rs2.next();
-                address[0] = rs2.getString("LINE1");
-                address[1] = rs2.getString("LINE2");
-                address[2] = rs2.getString("LINE3");
-                address[3] = rs2.getString("LINE4");
-                address[4] = rs2.getString("LINE5");
-                airport.setLocation(address);
-                rs2.close();
-                
                 airportList.add(airport);
             }
             
