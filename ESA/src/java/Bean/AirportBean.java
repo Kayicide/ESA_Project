@@ -19,8 +19,6 @@ import javax.inject.Named;
 @RequestScoped
 public class AirportBean {
     public ArrayList<AirportDTO>getAllAirports(){
-        ArrayList<AirportDTO> list = (ArrayList<AirportDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_AIRPORTS).execute();
-        System.out.println("Bean amount: " + list.size());
-        return list;
+        return (ArrayList<AirportDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_AIRPORTS).execute();
     }
 }

@@ -6,10 +6,12 @@
 package Gateway;
 
 import DTO.AirportDTO;
+import static Gateway.GatewayAbstract.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,34 +25,46 @@ public class AirportGateway extends GatewayAbstract {
     private Connection conn;
 
     public boolean insert(AirportDTO airport) {
-        
+        int addressID = 0;
         boolean added = false;
         
         try
-        {
+        {   
             conn = database.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO AIRPORT (AirportID, Name, Location, NoTerminla, NoGates) values (?,?,?,?,?)");
-            stmt.setString(1, airport.getAirportID());
-            stmt.setString(2, airport.getName());
-            stmt.setString(3, airport.getLocation());
-            stmt.setInt(4, airport.getNoTerminals());
-            stmt.setInt(5, airport.getNoGates());
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ADDRESS (LINE1, LINE2, LINE3, LINE4, LINE5) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, (airport.getLocation()[0]));
+            stmt.setString(2, (airport.getLocation()[1]));
+            stmt.setString(3, (airport.getLocation()[2]));
+            stmt.setString(4, (airport.getLocation()[3]));
+            stmt.setString(5, (airport.getLocation()[4]));
+            if(stmt.executeUpdate() != 0){
+                ResultSet rs = stmt.getGeneratedKeys();
+                rs.next();
+                addressID = rs.getInt(1);
+                stmt = conn.prepareStatement("INSERT INTO AIRPORT (ID, NAME, ADDRESS_ID, TERMINALS, GATES) values (?,?,?,?,?)");
+                stmt.setString(1, airport.getAirportID());
+                stmt.setString(2, airport.getName());
+                stmt.setInt(3, addressID);
+                stmt.setInt(4, airport.getNoTerminals());
+                stmt.setInt(5, airport.getNoGates());
             
-            int rows = stmt.executeUpdate();
-            added = rows == 1;
-            
+                int rows = stmt.executeUpdate();
+                if(rows == 0){
+                    return false;
+                }
+            }else{
+                return false;
+            }
             stmt.close();
-            finishSQL(conn);
-            
+            finishSQL(conn); 
+            return true;
         }
         catch (SQLException ex)
         {
             ex.printStackTrace();
-            added = false;
             finishSQL(conn);
+            return false;
         }
-
-        return added;
     }
 
     public boolean delete(String id) {

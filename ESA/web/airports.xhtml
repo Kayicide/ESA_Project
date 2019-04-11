@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">    
+    
+    <h:head>
+        <title>Airports</title>
+    </h:head>
+    <h:body>
+         <ui:composition template = "templates/common.xhtml">
+            <ui:define name="content">   
+                <h:form >
+                    <h:dataTable value="#{airportBean.allAirports}" 
+                                 var="airport"
+                                 cellpadding="10"
+                                 styleClass="Table" 
+                                 headerClass="TableHeader"
+                                 rowClasses="TableOddRow,TableEvenRow">
+                        <h:column>
+                            <f:facet name="header">Code</f:facet>
+                            <h:outputText value="#{airport.airportID}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText value="#{airport.name}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Terminals</f:facet>
+                            <h:outputText value="#{airport.noTerminals}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Gates</f:facet>
+                            <h:outputText value="#{airport.noGates}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Postcode</f:facet>
+                            <h:outputText value="#{airport.location[1]} : " />
+                            <h:outputText value="#{airport.location[2]} : " />
+                            <h:outputText value="#{airport.location[3]} : " />
+                            <h:outputText value="#{airport.location[4]} : " />
+                            <h:outputText value="#{airport.location[5]}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                        </h:column>
+                    </h:dataTable>
+                    <h:commandButton value="Add" action="addroute.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
+                </h:form>
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>
+

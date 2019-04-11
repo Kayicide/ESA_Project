@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">    
+    
+    <h:head>
+        <title>User Registration</title>
+    </h:head>
+    <h:body>
+         <ui:composition template = "templates/common.xhtml">
+            <ui:define name="content">
+                <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
+                    <h2>Create an account</h2>
+                    <div class="registerForm">
+                        <h:form>
+                            <h3>Account Details </h3>
+                            <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
+                            <h:outputText value="Airport Code: "/>
+                            <h:inputText value="#{addAirportBean.airportID}"/>
+                            <h:outputText value="Airport Name: "/>
+                            <h:inputText value="#{addAirportBean.name}"/>
+                            <h:outputText value="Number of Terminals: "/>
+                            <h:inputText value="#{addAirportBean.noTerminals}" converterMessage="Please enter digits only." />
+                            <h:outputText value="Number of Gates: "/>
+                            <h:inputText value="#{addAirportBean.noGates}" converterMessage="Please enter digits only." />
+                            </h:panelGrid>
+                            <h3>Address</h3>
+                            <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
+                            <h:outputText value="Address Line 1: "/>
+                            <h:inputText value="#{addAirportBean.line1}"/>
+                            <h:outputText value="Address Line 2: "/>
+                            <h:inputText value="#{addAirportBean.line2}"/>
+                            <h:outputText value="City: "/>
+                            <h:inputText value="#{addAirportBean.line3}"/>
+                            <h:outputText value="County: "/>
+                            <h:inputText value="#{addAirportBean.line4}"/>
+                            <h:outputText value="Postcode: "/>
+                            <h:inputText value="#{addAirportBean.line5}"/>
+                            </h:panelGrid>
+                            <h:commandButton value="Submit" action="#{addAirportBean.addAirport()}" />
+                    </h:form>
+                    </div>
+                </div>
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>
+
