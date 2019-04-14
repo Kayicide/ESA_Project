@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
@@ -14,19 +15,26 @@ import java.util.Calendar;
 public class FlightDTO {
     private int flightID;
     private RouteDTO route;
-    private Calendar departureDateTime;
+    private Timestamp departureDateTime, arrivalDateTime;
     private String status;
     
-    public FlightDTO(int flightID, RouteDTO route, Calendar departureDateTime, String status){
+    public FlightDTO(int flightID, RouteDTO route, Timestamp departureDateTime, Timestamp arrivalDateTime, String status){
         this.flightID = flightID;
         this.route = route;
         this.departureDateTime = departureDateTime;
+        this.arrivalDateTime = arrivalDateTime;
         this.status = status;
     }
-    public FlightDTO(RouteDTO route, Calendar departureDateTime, String status){
+    public FlightDTO(int flightID, RouteDTO route, Timestamp departureDateTime, Timestamp arrivalDateTime){
         this.flightID = flightID;
         this.route = route;
         this.departureDateTime = departureDateTime;
+        this.arrivalDateTime = arrivalDateTime;
+    }
+    public FlightDTO(RouteDTO route, Timestamp departureDateTime, Timestamp arrivalDateTime, String status){
+        this.route = route;
+        this.departureDateTime = departureDateTime;
+        this.arrivalDateTime = arrivalDateTime;
         this.status = status;
     }
 
@@ -38,7 +46,7 @@ public class FlightDTO {
         return route;
     }
 
-    public Calendar getDepartureDateTime() {
+    public Timestamp getDepartureDateTime() {
         return departureDateTime;
     }
 
@@ -54,11 +62,21 @@ public class FlightDTO {
         this.route = route;
     }
 
-    public void setDepartureDateTime(Calendar departureDateTime) {
+    public void setDepartureDateTime(Timestamp departureDateTime) {
         this.departureDateTime = departureDateTime;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }   
+
+    public Timestamp getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public void setArrivalDateTime(Timestamp arrivalDateTime) {
+        this.arrivalDateTime = arrivalDateTime;
+    }
+    
+    
 }

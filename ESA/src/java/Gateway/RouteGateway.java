@@ -139,21 +139,26 @@ public class RouteGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             String sqlSt = "// SQL //";
-            PreparedStatement stmt = conn.prepareStatement("SELECT ROUTE.ID, Airport.AirportID ,Airport.destination"
-                 + " FROM ROUTE JOIN Airport on Route.AirportID = Airport.Airport"
-                 + " WHERE Route.RouteID = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Route.ID, Plane.ID as PlaneID, Plane.\"TYPE\", Plane.CAPACITY, Plane.CREW, a.ID as aID, a.\"NAME\" as aNAME, a.ADDRESS_ID as aAddress_ID, a.TERMINALS as aTERMINALS, a.GATES as aGATES, b.ID as bID, b.\"NAME\" as bNAME, b.ADDRESS_ID as bADDRESS_ID, b.TERMINALS as bTERMINALS, b.GATES as bGATES FROM ROUTE"
+                    + " JOIN Airport a on STARTING_AIRPORT_ID = a.ID"
+                    + " JOIN Airport b on FINISHING_AIRPORT_ID = b.ID"
+                    + " JOIN Plane on Route.PLANE_ID = Plane.ID"
+                    + " WHERE ID = ?");
             stmt.setInt(1, id);
-            
             ResultSet rs = stmt.executeQuery();
+            
             
             if(rs.next())
             {
-                AirportDTO destination = new AirportDTO(rs.getString("airportID"), null, rs.getString("destination"), 0, 0);
-                AirportDTO departureAirport = new AirportDTO(rs.getString("airportID"), null, rs.getString("destination"), 0, 0);
+                AirportDTO departureAirport = new AirportDTO(rs.getString("aID"), rs.getString("aNAME"), rs.getInt("aTERMINALS"), rs.getInt("aGATES"));
+                AirportDTO destination = new AirportDTO(rs.getString("bID"), rs.getString("bNAME"), rs.getInt("bTERMINALS"), rs.getInt("bGATES"));
+                departureAirport.setLocation(getAddress(rs.getInt("aADDRESS_ID")));
+                destination.setLocation(getAddress(rs.getInt("bADDRESS_ID")));
+                PlaneDTO plane = new PlaneDTO(rs.getInt("PlaneID"), rs.getString("TYPE"), rs.getInt("CAPACITY"), rs.getInt("CREW"));
                 route = new RouteDTO(
                         rs.getInt("routeID"),
                         destination,
-                        departureAirport, null);
+                        departureAirport, plane);
             }
             
             rs.close();

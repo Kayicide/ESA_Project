@@ -25,4 +25,17 @@ public class AirportBean {
     public void deleteAirport(String id){
         CommandFactory.createCommand(CommandFactory.DELETE_AIRPORT, id).execute(); 
     }
+    
+    public String[] getGates(String id){ //Not used yet, might never be
+        ArrayList<String> test = new ArrayList<>();
+        int gates = ((AirportDTO)CommandFactory.createCommand(CommandFactory.DELETE_AIRPORT, id).execute()).getNoGates();
+        int terminals = ((AirportDTO)CommandFactory.createCommand(CommandFactory.DELETE_AIRPORT, id).execute()).getNoTerminals();
+        
+        for(int i = 0; i < terminals; i++){
+            for(int j = 0; j < gates; j++){
+                test.add("T: " + i + " G: " + j);
+            }
+        }
+        return test.toArray(new String[test.size()]);
+    }
 }

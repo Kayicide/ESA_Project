@@ -8,6 +8,7 @@ package Bean;
 import Command.CommandFactory;
 import DTO.FlightDTO;
 import DTO.RouteDTO;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -24,14 +25,14 @@ public class AddFlightBean {
     //private Calendar departureDateTime;
     //private String status;
     private int routeID;
-    private Calendar departureDateTime;
+    private Timestamp departureDateTime, arrivalDateTime;
     private String status;
 
     public void setRouteID(int routeID) {
         this.routeID = routeID;
     }
 
-    public void setDepartureDateTime(Calendar departureDateTime) {
+    public void setDepartureDateTime(Timestamp departureDateTime) {
         this.departureDateTime = departureDateTime;
     }
 
@@ -43,17 +44,25 @@ public class AddFlightBean {
         return routeID;
     }
 
-    public Calendar getDepartureDateTime() {
+    public Timestamp getDepartureDateTime() {
         return departureDateTime;
     }
 
     public String getStatus() {
         return status;
     }
-    
+
+    public Timestamp getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public void setArrivalDateTime(Timestamp arrivalDateTime) {
+        this.arrivalDateTime = arrivalDateTime;
+    }
+
     public String addFlight(){
-        FlightDTO flight = new FlightDTO(new RouteDTO(routeID), departureDateTime, status);
+        FlightDTO flight = new FlightDTO(new RouteDTO(routeID), departureDateTime, arrivalDateTime, status);
         CommandFactory.createCommand(CommandFactory.ADD_FLIGHT, flight).execute();
-        return "home";
+        return "index.xhtml";
     }
 }

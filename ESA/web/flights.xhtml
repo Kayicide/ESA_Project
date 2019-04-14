@@ -12,26 +12,39 @@
          <ui:composition template = "templates/common.xhtml">
             <ui:define name="content">   
                  <h:form>
-                        <h:dataTable value=""
-                                     styleClass="frontTable">   
+                     <h:dataTable value="#{flightBean.allFlights}" 
+                                 var="flight"
+                                 cellpadding="10"
+                                 styleClass="Table" 
+                                 headerClass="TableHeader"
+                                 rowClasses="TableOddRow,TableEvenRow">
                             <h:column>
-                                <f:facet name="header">Route</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Departing From</f:facet>
+                                <h:outputText value="#{flight.route.departureAirport.name}"/>
                             </h:column> 
 
                             <h:column>
-                                <f:facet name="header">Departure</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Departure At</f:facet>
+                                <h:outputText value="#{flight.departureDateTime}">
+                                    <f:converter converterId="DateConverter" />
+                                </h:outputText>
                             </h:column>
-
+                        
                             <h:column>
-                                <f:facet name="header">Status</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Arriving At</f:facet>
+                                <h:outputText value="#{flight.route.destination.name}"/>
+                            </h:column>
+                        
+                            <h:column>
+                                <f:facet name="header">Arrival Time</f:facet>
+                                <h:outputText value="#{flight.arrivalDateTime}">
+                                    <f:converter converterId="DateConverter" />
+                                </h:outputText>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">Administrator actions</f:facet>
-                                <h:commandButton value="Book showing" action="" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}" />
+                                <h:commandButton value="Book showing" action="test.xhtml" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}" />
                             </h:column>
 
                         </h:dataTable>   

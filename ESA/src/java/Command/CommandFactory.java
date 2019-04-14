@@ -38,6 +38,7 @@ public class CommandFactory {
     public static final int GET_ALL_AIRPORTS = 11;
     public static final int DELETE_AIRPORT = 15;
     public static final int ADD_AIRPORT = 16;
+    public static final int GET_AIRPORT = 17;
     
     //Plane
     public static final int GET_ALL_PLANES = 12;
@@ -78,6 +79,8 @@ public class CommandFactory {
         switch (commandType) {
             case DELETE_AIRPORT:
                 return new DeleteAirport(id);
+            case GET_AIRPORT:
+                return new GetAirport(id);
             default:
                 return null;
         }

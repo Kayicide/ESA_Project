@@ -146,9 +146,8 @@ public class AirportGateway extends GatewayAbstract {
         return airportList;
     }
 
-    public Object getByID(String id) {
-        AirportDTO airport = new AirportDTO(null, null, null, 0, 0);
-        
+    public Object getByID(String id) {      
+        AirportDTO airport = null;
         try
         {
             conn = database.getConnection();
@@ -162,22 +161,22 @@ public class AirportGateway extends GatewayAbstract {
             if(rs.next())
             {
                 airport = new AirportDTO(
-                        rs.getString("airportID"),
-                        rs.getString("name"),
-                        rs.getString("location"),
-                        rs.getInt("noTerminals"),
-                        rs.getInt("noGates"));
+                    rs.getString("ID"),
+                    rs.getString("NAME"),
+                    rs.getInt("TERMINALS"),
+                    rs.getInt("GATES")
+                );
+                airport.setLocation(getAddress(rs.getInt("ADDRESS_ID")));
             }
-            
             rs.close();
             stmt.close();
             finishSQL(conn);
-            
         }
         catch(SQLException ex)
         {
             ex.printStackTrace();
             finishSQL(conn);
+            return null;
         }
         
         return airport;
