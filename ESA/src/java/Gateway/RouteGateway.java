@@ -63,8 +63,14 @@ public class RouteGateway extends GatewayAbstract{
         try
         {
             conn = database.getConnection();
-            
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Planes WHERE ID = ?");
+            PreparedStatement stmt3 = conn.prepareStatement("DELETE FROM BOOKING WHERE FLIGHT_ID IN (SELECT ID FROM Flight WHERE ROUTE_ID IN (SELECT ID from Route WHERE ID = ?)");
+            stmt3.setInt(1, id);
+            stmt3.executeUpdate();
+            PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM Flight WHERE ROUTE_ID IN (SELECT ID from Route WHERE ID = ?)");
+            stmt2.setInt(1, id);
+            stmt2.executeUpdate();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM ROUTE WHERE ID = ?");
+            stmt.setInt(1, id);
             
             stmt.setInt(1, id);
             

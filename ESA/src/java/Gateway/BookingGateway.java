@@ -88,7 +88,7 @@ public class BookingGateway extends GatewayAbstract{
             
             
             PreparedStatement stmt = conn.prepareStatement("SELECT Bookings, Users.UserName ,Users.fullname, Users.passportNumber,"
-                 + "Flight.FlightID, Flight.Status"
+                 + " Flight.FlightID, Flight.Status"
                  + " FROM BOOKINGS JOIN Users on Bookings.UserName = Users.UserName"
                  + " JOIN FLIGHT on Bookings.FlightID = Flight.FlightID"
                  + " WHERE Bookings.UserName = ?");
