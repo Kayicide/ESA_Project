@@ -10,10 +10,11 @@
     <h:body>
          <ui:composition template = "templates/common.xhtml">
             <ui:define name="content">
-                <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
+                <div align="center" style="background-image:url(resources/img/background.png);height: 750px;" class="displayContainer">
                     <h2>Create an account</h2>
-                    <div class="registerForm">
+                    <div align="center">
                         <h:form>
+                            <h:panelGrid columns="1" styleClass="displayTable">
                             <h3>Account Details </h3>
                             <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
                             <h:outputText value="Username: "/>
@@ -48,6 +49,7 @@
                             <h:panelGrid columns="2">
                             <h:commandButton type="submit" value="Create account" action="#{registerBean.register()}" /> 
                             <h:commandButton type="submit" value="Cancel" action="index" /> 
+                            </h:panelGrid>
                             </h:panelGrid>
                     </h:form>
                     </div>

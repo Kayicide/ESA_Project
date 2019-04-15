@@ -11,17 +11,25 @@
          <ui:composition template = "templates/common.xhtml">
             <ui:define name="content">
                 <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
+                    <div class="loginPanel">
                     <h:form>
                         <h1> Login </h1>
-                        <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
-                        <h:outputText value="username: "/>
+                        <h:panelGrid columns="1" >
+                        <h:outputText value="Username: "/>
                         <h:inputText value="#{UserBean.username}"/>
-                        <h:outputText value="password: "/>
+                        <h:outputText value="Password: "/>
                         <h:inputSecret value="#{UserBean.password}"/>
-                        <h:commandButton type="submit" value="Login" action="#{UserBean.Login()}"/>
-                        <h:commandButton type="submit" value="Back" action="/index"/>
+                        
+                        <h:panelGrid columns="2">
+                            <h:commandButton type="submit" value="Login" action="#{UserBean.Login()}"/>
+                            <h:commandButton type="submit" value="Back" action="/index"/>
+                        </h:panelGrid>
+                        
+                       <a href="register.xhtml">Sign up!</a>
+                        
                         </h:panelGrid>
                     </h:form>
+                    </div>
                 </div>
             </ui:define>
          </ui:composition>

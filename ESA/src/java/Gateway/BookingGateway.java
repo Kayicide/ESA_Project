@@ -99,7 +99,7 @@ public class BookingGateway extends GatewayAbstract{
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("dateTimeBooked"));
                 UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, null, rs.getString("passportNumber"), false);
-                FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
+                FlightDTO flight = new FlightDTO(rs.getInt("flightID"),null, null, null, rs.getString("status"));
                 BookingDTO booking = new BookingDTO(user, flight, cal);
                 bookingList.add(booking);               
  
@@ -139,7 +139,7 @@ public class BookingGateway extends GatewayAbstract{
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(rs.getDate("dateTimeBooked"));
                 UserDTO user = new UserDTO(rs.getString("username"), null, rs.getString("fullname"), null, null, rs.getString("passportNumber"), false);
-                FlightDTO flight = new FlightDTO(rs.getInt("flightID"), null, null, rs.getString("status"));
+                FlightDTO flight = new FlightDTO(rs.getInt("flightID"),null, null, null, rs.getString("status"));
                 booking = new BookingDTO(user, flight, cal);
                                
  

@@ -11,13 +11,13 @@
     <h:body>
          <ui:composition template = "templates/common.xhtml">
             <ui:define name="content">   
+                <div align="center" class="displayContainer">
                 <h:form >
                     <h:dataTable value="#{airportBean.allAirports}" 
                                  var="airport"
                                  cellpadding="10"
-                                 styleClass="Table" 
-                                 headerClass="TableHeader"
-                                 rowClasses="TableOddRow,TableEvenRow">
+                                 styleClass="displayTable" 
+                                 >
                         <h:column>
                             <f:facet name="header">Code</f:facet>
                             <h:outputText value="#{airport.airportID}" />
@@ -39,7 +39,7 @@
                         </h:column>
                         
                         <h:column>
-                            <f:facet name="header">Postcode</f:facet>
+                            <f:facet name="header">Address</f:facet>
                             <h:outputText value="#{airport.location[1]} : " />
                             <h:outputText value="#{airport.location[2]} : " />
                             <h:outputText value="#{airport.location[3]} : " />
@@ -52,8 +52,9 @@
                             <h:commandButton value="Delete" action="${airportBean.deleteAirport(airport.airportID)}"/>
                         </h:column>
                     </h:dataTable>
-                    <h:commandButton value="Add" action="addroute.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
+                    <h:commandButton value="Add Airport" action="addairport.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
                 </h:form>
+                </div>
             </ui:define>
          </ui:composition>
     </h:body>

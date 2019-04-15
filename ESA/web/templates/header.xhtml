@@ -16,14 +16,27 @@ and open the template in the editor.
             <h:form class="topnav">
                 <div style="float: left;">
                     <h:commandButton value="Home" action="/index" styleClass="myButtons"></h:commandButton>
-                    <h:commandButton value="Flights" action="/flights" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
-                    <h:commandButton value="My Bookings" action="/bookings" styleClass="myButtons" rendered="#{UserBean.loggedIn and !(UserBean.currentUser.isAdmin)}"></h:commandButton>
-                    <h:commandButton value="Flights" action="/Admin/films" styleClass="myButtons" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}"></h:commandButton>
-                    <h:commandButton value="Users" action="/Admin/users" styleClass="myButtons" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}"></h:commandButton>
+                    <h:commandButton value="Flights" action="flights.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
+                    <h:commandButton value="My Bookings" action="bookings.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn and !(UserBean.currentUser.isAdmin)}"></h:commandButton>
+                    <h:panelGroup rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">
+                    <div class="dropdown">
+                        
+                        <button class="myButtons">Admin 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                       
+                        <div class="dropdown-content">
+                        <a href="flights.xhtml">View Flights</a>
+                        <a href="planes.xhtml">View Planes</a>
+                        <a href="airports.xhtml">View Airports</a>
+                        <a href="routes.xhtml">View Routes</a>
+                        </div>
+                    </div>
+                </h:panelGroup>
                 </div>
                 <div style="float: right;">
                     <h:commandButton value="Account" action="/account" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
-                    <h:commandButton value="Logout" action="#{UserBean.logout}" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
+                    <h:commandButton value="Logout" action="#{UserBean.Logout}" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:commandButton value="Login" action="/login" styleClass="myButtons" rendered="#{(!UserBean.loggedIn)}"></h:commandButton>
                     <h:commandButton value="Register" action="/register" styleClass="myButtons" rendered="#{(!UserBean.loggedIn)}"></h:commandButton>
                 </div>

@@ -12,9 +12,9 @@
          <ui:composition template = "templates/common.xhtml">
             <ui:define name="content">
                 <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
-                    <h2>Create an account</h2>
+                    <h2>Add Route</h2>
                     <h:form>
-                        <h:panelGrid columns="2">
+                        <h:panelGrid columns="2" styleClass="displayTable">
                             <p><b>Departing From:</b></p>
                             <h:selectOneMenu value="#{addRouteBean.airport1ID}" required="true" requiredMessage="Please enter an airport!">
                                 <f:selectItems value="#{airportBean.allAirports}" var="airport" itemLabel="#{airport.name}" itemValue="#{airport.airportID}" />
@@ -28,6 +28,7 @@
                                     <f:selectItems value="#{planeBean.allPlanes}" var="plane" itemLabel="#{plane.planeModel}" itemValue="#{plane.planeID}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
+                        <br></br>
                         <h:commandButton value="Submit" action="#{addRouteBean.addRoute()}" />
                     </h:form>
                 </div>

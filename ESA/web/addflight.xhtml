@@ -14,7 +14,7 @@
                 <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
                     <h2>Create a Flight!</h2>
                     <h:form>
-                        <h:panelGrid columns="2">
+                        <h:panelGrid columns="2" styleClass="displayTable">
                             <p><b>Route:</b></p>
                             <h:selectOneMenu value="#{addFlightBean.routeID}" required="true" requiredMessage="Please enter an airport!">
                                 <f:selectItems value="#{routeBean.allRoutes}" var="route" itemLabel="#{route.departureAirport.name}" itemValue="#{route.routeID}" />

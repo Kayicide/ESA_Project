@@ -10,14 +10,14 @@
     </h:head>
     <h:body>
          <ui:composition template = "templates/common.xhtml">
-            <ui:define name="content">   
+            <ui:define name="content">  
+                <div align="center" class="displayContainer">
                  <h:form>
                      <h:dataTable value="#{flightBean.allFlights}" 
                                  var="flight"
                                  cellpadding="10"
-                                 styleClass="Table" 
-                                 headerClass="TableHeader"
-                                 rowClasses="TableOddRow,TableEvenRow">
+                                 styleClass="displayTable" 
+                                 >
                             <h:column>
                                 <f:facet name="header">Departing From</f:facet>
                                 <h:outputText value="#{flight.route.departureAirport.name}"/>
@@ -47,10 +47,12 @@
                                 <h:commandButton value="Delete" action="#{flightBean.deleteFlight(flight.flightID)}" />
                             </h:column>
 
-                        </h:dataTable>   
+                        </h:dataTable>
+                        <br></br>
+                        <h:commandButton value="Add Flight" action="addflight.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
                 </h:form>
+                </div>
             </ui:define>
          </ui:composition>
     </h:body>
 </html>
-

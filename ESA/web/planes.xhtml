@@ -10,12 +10,13 @@
     </h:head>
     <h:body>
          <ui:composition template = "templates/common.xhtml">
-            <ui:define name="content">   
+            <ui:define name="content">
+                <div align="center" class="displayContainer">
                 <h:form >
                     <h:dataTable value="#{planeBean.allPlanes}" 
                                  var="plane"
                                  cellpadding="10"
-                                 styleClass="Table" 
+                                 styleClass="displayTable" 
                                  headerClass="TableHeader"
                                  rowClasses="TableOddRow,TableEvenRow">
                         <h:column>
@@ -43,8 +44,10 @@
                             <h:commandButton value="Delete" action="#{planeBean.deletePlane(plane.planeID)}" />
                         </h:column>
                     </h:dataTable>
-                    <h:commandButton value="Add" action="addroute.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
+                    <br></br>
+                    <h:commandButton value="Add" action="addplane.xhtml" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"/>
                 </h:form>
+                </div>
             </ui:define>
          </ui:composition>
     </h:body>

@@ -11,10 +11,11 @@
     <h:body>
          <ui:composition template = "templates/common.xhtml">
             <ui:define name="content">   
+                <div align="center" class="displayContainer">
                  <h:form>
                         <h:dataTable value=""
                                      var="show"
-                                     styleClass="frontTable">   
+                                     styleClass="displayTable">   
                             <h:column>
                                 <f:facet name="header">Booking ID</f:facet>
                                 <h:outputText value=""/>
@@ -52,6 +53,7 @@
 
                         </h:dataTable>   
                 </h:form>
+                </div>
             </ui:define>
          </ui:composition>
     </h:body>
