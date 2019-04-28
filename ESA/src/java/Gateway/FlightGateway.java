@@ -145,7 +145,7 @@ public class FlightGateway extends GatewayAbstract{
                     + " JOIN Airport a on STARTING_AIRPORT_ID = a.ID"
                     + " JOIN Airport b on FINISHING_AIRPORT_ID = b.ID"
                     + " JOIN Plane on Route.PLANE_ID = Plane.ID"
-                    + " WHERE ID = ?");
+                    + " WHERE FLIGHT.ID = ?");
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next())

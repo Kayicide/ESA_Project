@@ -5,8 +5,10 @@
  */
 package Bean;
 
+import Command.CommandFactory;
 import DTO.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
@@ -14,9 +16,19 @@ import javax.inject.Named;
 @RequestScoped
 public class BookingBean implements Serializable {
     
-    private FlightDTO flight;
+    
     UserBean userbean = new UserBean();
     UserDTO user = userbean.getCurrentUser();
+    
+    public ArrayList<BookingDTO>getAllBookings(String username){
+        return (ArrayList<BookingDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_BOOKINGS, username).execute();
+    }
+    
+    public void deleteBooking(String id){
+        CommandFactory.createCommand(CommandFactory.DELETE_BOOKING, id);
+    }
+    
+   
     
     
     

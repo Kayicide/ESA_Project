@@ -17,7 +17,7 @@ and open the template in the editor.
                 <div style="float: left;">
                     <h:commandButton value="Home" action="/index" styleClass="myButtons"></h:commandButton>
                     <h:commandButton value="Flights" action="flights.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
-                    <h:commandButton value="My Bookings" action="bookings.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn and !(UserBean.currentUser.isAdmin)}"></h:commandButton>
+                    <h:commandButton value="My Bookings" action="/bookings.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:panelGroup rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">
                     <div class="dropdown">
                         

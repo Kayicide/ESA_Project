@@ -10,6 +10,7 @@ import DTO.FlightDTO;
 import DTO.PlaneDTO;
 import DTO.RouteDTO;
 import DTO.UserDTO;
+import DTO.BookingDTO;
 import Manager.ManagerFactory;
 
 /**
@@ -44,6 +45,12 @@ public class CommandFactory {
     public static final int GET_ALL_PLANES = 12;
     public static final int ADD_PLANE = 13;
     public static final int DELETE_PLANE = 14;
+    
+    //Booking
+    public static final int GET_ALL_BOOKINGS = 18;
+    public static final int ADD_BOOKING = 19;
+    public static final int DELETE_BOOKING = 20;
+   
 
     public static Command createCommand(int commandType) {
         switch (commandType) {
@@ -81,6 +88,10 @@ public class CommandFactory {
                 return new DeleteAirport(id);
             case GET_AIRPORT:
                 return new GetAirport(id);
+            case DELETE_BOOKING:
+                return new DeleteBooking(id);
+            case GET_ALL_BOOKINGS:
+                return new GetAllBookings(id);
             default:
                 return null;
         }
@@ -124,6 +135,14 @@ public class CommandFactory {
         switch (commandType) {
             case ADD_AIRPORT:
                 return new InsertAirport(airport);
+            default:
+                return null;
+        }
+    }
+    public static Command createCommand(int commandType, BookingDTO booking) {
+        switch (commandType) {
+            case ADD_BOOKING:
+                return new InsertBooking(booking);
             default:
                 return null;
         }

@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
@@ -12,16 +13,27 @@ import java.util.Calendar;
  * @author kayde
  */
 public class BookingDTO {
+    private int bookingID;
     private UserDTO user;
     private FlightDTO flight;
-    private Calendar dateTimeBooked;
+    private Timestamp dateTimeBooked;
     private String status;
-    public BookingDTO(UserDTO user, FlightDTO flight, Calendar dateTimeBooked){
+    public BookingDTO(int bookingID, UserDTO user, FlightDTO flight, Timestamp dateTimeBooked){
+        this.bookingID = bookingID;
         this.user = user;
         this.flight = flight;
         this.dateTimeBooked = dateTimeBooked;
     }
+
+    public int getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(int bookingID) {
+        this.bookingID = bookingID;
+    }
     
+
     public String getStatus(){
         return status;
     }
@@ -34,7 +46,7 @@ public class BookingDTO {
         return flight;
     }
 
-    public Calendar getDateTimeBooked() {
+    public Timestamp getDateTimeBooked() {
         return dateTimeBooked;
     }
     
@@ -54,7 +66,7 @@ public class BookingDTO {
         this.flight = flight;
     }
 
-    public void setDateTimeBooked(Calendar dateTimeBooked) {
+    public void setDateTimeBooked(Timestamp dateTimeBooked) {
         this.dateTimeBooked = dateTimeBooked;
     }
     

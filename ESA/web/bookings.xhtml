@@ -13,42 +13,39 @@
             <ui:define name="content">   
                 <div align="center" class="displayContainer">
                  <h:form>
-                        <h:dataTable value=""
-                                     var="show"
+                     <h:dataTable value="#{bookingBean.getAllBookings(UserBean.currentUser)}"
+                                     var="booking"
                                      styleClass="displayTable">   
                             <h:column>
                                 <f:facet name="header">Booking ID</f:facet>
-                                <h:outputText value=""/>
+                                <h:outputText value="#{booking.bookingID}"/>
                             </h:column> 
 
                             <h:column>
                                 <f:facet name="header">Flight ID</f:facet>
-                                <h:outputText value=""/>
+                                <h:outputText value="#{booking.flight.flightID}"/>
                             </h:column>
                             
                             <h:column>
-                                <f:facet name="header">Departure</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Departure Time</f:facet>
+                                <h:outputText value="#{booking.flight.departureDateTime}"/>
                             </h:column>
                             
                             <h:column>
-                                <f:facet name="header">Route</f:facet>
-                                <h:outputText value=""/>
+                                <f:facet name="header">Departure Airport</f:facet>
+                                <h:outputText value="#{booking.flight.route.departureAirport}"/>
                             </h:column>
                             
                             <h:column>
                                 <f:facet name="header">Destination</f:facet>
-                                <h:outputText value=""/>
+                                <h:outputText value="#{booking.flight.route.destination}"/>
                             </h:column>
                             
-                            <h:column>
-                                <f:facet name="header">Status</f:facet>
-                                <h:outputText value=""/>
-                            </h:column>
+                           
 
                             <h:column>
-                                <f:facet name="header" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">Options</f:facet>
-                                <h:commandButton value="Book showing" action=""/>
+                                <f:facet name="header" rendered="#{UserBean.loggedIn}">Options</f:facet>
+                                <h:commandButton value="Cancel" action="#{bookingBean.deleteBooking(booking.bookingID)}"/>
                             </h:column>
 
                         </h:dataTable>   

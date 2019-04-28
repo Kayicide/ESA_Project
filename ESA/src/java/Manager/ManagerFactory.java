@@ -18,6 +18,7 @@ public class ManagerFactory {
     public static final int PLANE_MANAGER = 4;
     public static final int ROUTE_MANAGER = 5;
     public static final int USER_MANAGER = 6;
+    
                     
     public ManagerAbstract create(int type){
         switch(type){

@@ -8,6 +8,7 @@ package Manager;
 import DTO.BookingDTO;
 import Gateway.BookingGateway;
 import java.util.ArrayList;
+import javax.naming.OperationNotSupportedException;
 
 /**
  *
@@ -27,13 +28,18 @@ public class BookingManager extends ManagerAbstract {
         return gateway.delete(id);
     }
 
+    
+    public ArrayList<Object> getAll(String username) {
+        return gateway.getAll(username);
+    }
+
     @Override
     public ArrayList<Object> getAll() {
         return gateway.getAll();
     }
-
+    
     @Override
     public Object getById(int id) {
-        return gateway.getByID(id);
+        throw new UnsupportedOperationException();
     }
 }
