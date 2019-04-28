@@ -98,7 +98,8 @@ public class BookingGateway extends GatewayAbstract{
                     + " JOIN Airport a on STARTING_AIRPORT_ID = a.ID"
                     + " JOIN Airport b on FINISHING_AIRPORT_ID = b.ID"
                     + " JOIN Plane on Route.PLANE_ID = Plane.ID"
-                    + " JOIN USER_INFO on booking.username = user_info.username");
+                    + " JOIN USER_INFO on booking.username = user_info.username"
+                    + " WHERE USER_INFO.USERNAME = ?");
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             
