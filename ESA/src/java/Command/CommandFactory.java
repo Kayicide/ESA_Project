@@ -77,6 +77,8 @@ public class CommandFactory {
                 return new GetRoute(id);
             case DELETE_PLANE:
                 return new DeletePlane(id);
+            case DELETE_BOOKING:
+                return new DeleteBooking(id);
             default:
                 return null;
         }
@@ -88,8 +90,6 @@ public class CommandFactory {
                 return new DeleteAirport(id);
             case GET_AIRPORT:
                 return new GetAirport(id);
-            case DELETE_BOOKING:
-                return new DeleteBooking(id);
             case GET_ALL_BOOKINGS:
                 return new GetAllBookings(id);
             default:

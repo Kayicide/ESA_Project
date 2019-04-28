@@ -5,11 +5,13 @@
  */
 package DTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Kayde
  */
-public class AirportDTO {
+public class AirportDTO implements Serializable {
     private String airportID; //Example: LHR for Heathrow
     private String name;
     private String[] location;

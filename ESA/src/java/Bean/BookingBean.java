@@ -21,11 +21,13 @@ public class BookingBean implements Serializable {
     UserDTO user = userbean.getCurrentUser();
     
     public ArrayList<BookingDTO>getAllBookings(String username){
+        System.out.println("Getting all bookings for " + username);
         return (ArrayList<BookingDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_BOOKINGS, username).execute();
     }
     
-    public void deleteBooking(String id){
-        CommandFactory.createCommand(CommandFactory.DELETE_BOOKING, id);
+    public void deleteBooking(int id){
+        System.out.println("deleting booking " + id);
+        CommandFactory.createCommand(CommandFactory.DELETE_BOOKING, id).execute();
     }
     
    

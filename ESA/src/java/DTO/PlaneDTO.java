@@ -5,11 +5,13 @@
  */
 package DTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Kayde
  */
-public class PlaneDTO {
+public class PlaneDTO implements Serializable {
     private int PlaneID, Capacity, noCrew;
     private String planeModel;
     public PlaneDTO(int PlaneID, String planeModel, int Capacity, int noCrew){

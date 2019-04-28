@@ -60,17 +60,24 @@ public class BookingGateway extends GatewayAbstract{
     }
         
     public boolean delete(int id){
+        System.out.println("Gateway - Deleting booking");
         boolean deleted = false;
         
         try
         {
             conn = database.getConnection();
             
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM BOOKINGS WHERE ID = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM BOOKING WHERE ID = ?");
             stmt.setInt(1, id);
             
-            int rows = stmt.executeUpdate();
-            deleted = rows == 1;
+            
+            
+            if(stmt.executeUpdate() == 0){
+                
+                stmt.close();
+                finishSQL(conn);
+                return false;
+            }
             
             stmt.close();
             finishSQL(conn);
@@ -138,7 +145,7 @@ public class BookingGateway extends GatewayAbstract{
                         flight,
                         rs.getTimestamp("TIME_BOOKED"));
                 
-                
+                System.out.println(booking.getUser().getUsername());
                 bookingList.add(booking);
             }
             

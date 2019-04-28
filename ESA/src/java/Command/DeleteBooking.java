@@ -12,10 +12,11 @@ import Manager.BookingManager;
  * @author Jake
  */
 public class DeleteBooking implements Command {
-    String id;
+    int id;
     BookingManager manager = new BookingManager();
     
-    public DeleteBooking(String id){
+    public DeleteBooking(int id){
+        System.out.println("Deleting booking " + id);
         this.id = id;
     }
     

@@ -13,7 +13,7 @@
             <ui:define name="content">   
                 <div align="center" class="displayContainer">
                  <h:form>
-                     <h:dataTable value="#{bookingBean.getAllBookings(UserBean.currentUser)}"
+                     <h:dataTable value="#{bookingBean.getAllBookings(UserBean.currentUser.username)}"
                                      var="booking"
                                      styleClass="displayTable">   
                             <h:column>
@@ -33,12 +33,12 @@
                             
                             <h:column>
                                 <f:facet name="header">Departure Airport</f:facet>
-                                <h:outputText value="#{booking.flight.route.departureAirport}"/>
+                                <h:outputText value="#{booking.flight.route.departureAirport.name}"/>
                             </h:column>
                             
                             <h:column>
                                 <f:facet name="header">Destination</f:facet>
-                                <h:outputText value="#{booking.flight.route.destination}"/>
+                                <h:outputText value="#{booking.flight.route.destination.name}"/>
                             </h:column>
                             
                            

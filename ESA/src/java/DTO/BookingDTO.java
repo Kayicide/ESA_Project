@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -12,7 +13,7 @@ import java.util.Calendar;
  *
  * @author kayde
  */
-public class BookingDTO {
+public class BookingDTO implements Serializable {
     private int bookingID;
     private UserDTO user;
     private FlightDTO flight;

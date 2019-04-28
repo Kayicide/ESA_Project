@@ -25,6 +25,7 @@ public class BookingManager extends ManagerAbstract {
 
     @Override
     public boolean delete(int id) {
+        System.out.println("manager called");
         return gateway.delete(id);
     }
 
