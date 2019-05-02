@@ -2,39 +2,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui = "http://java.sun.com/jsf/facelets">    
     
     <h:head>
-        <title>Account - #{UserBean.currentUser.username}</title>
+        <title>Account Information</title>
     </h:head>
     <h:body>
-         <ui:composition template = "templates/common.xhtml">
+         <ui:composition template = "/templates/common.xhtml">
             <ui:define name="content">
-                 <h:form>
-                        <h:dataTable value=""
-                                     styleClass="frontTable">   
-                            <h:column>
-                                <f:facet name="header">Username</f:facet>
-                                <h:outputText value="#{UserBean.currentUser.username}"/>
-                            </h:column> 
-
-                            <h:column>
-                                <f:facet name="header">Name</f:facet>
-                                <h:outputText value="#{UserBean.currentUser.firstName} #{UserBean.currentUser.surname}"/>
-                            </h:column>
+                <div align="center" class="displayContainer">
+                    <h2>View Account Details</h2>
+                    <div align="center">
+                        <h:form>
+                            <h:panelGrid columns="1" styleClass="displayTable">
+                            <h3>Account Details </h3>
+                            <h:panelGrid columns="2" styleClass="displayTable" rowClasses="tableRow">
+                            <h:outputText value="Username: "/>
+                            <h:inputText value="#{UserBean.currentUser.username}" readonly="true"/>
+                            </h:panelGrid>
+                            <h3>Personal Information</h3>
+                            <h:panelGrid columns="2" styleClass="displayTable" rowClasses="tableRow">
+                            <h:outputText value="First Name: "/>
+                            <h:inputText value="#{UserBean.currentUser.firstName}" readonly="true"/>
+                            <h:outputText value="Surname: "/>
+                            <h:inputText value="#{UserBean.currentUser.surname}" readonly="true"/>
+                            <h:outputText value="Address Line 1: "/>
+                            <h:inputText value="#{UserBean.currentUser.address[0]}" readonly="true"/>
+                            <h:outputText value="Address Line 2: "/>
+                            <h:inputText value="#{UserBean.currentUser.address[1]}" readonly="true"/>
+                            <h:outputText value="City: "/>
+                            <h:inputText value="#{UserBean.currentUser.address[2]}" readonly="true"/>
+                            <h:outputText value="County: "/>
+                            <h:inputText value="#{UserBean.currentUser.address[3]}" readonly="true"/>
+                            <h:outputText value="Postcode: "/>
+                            <h:inputText value="#{UserBean.currentUser.address[4]}" readonly="true"/>
+                            <h:outputText value="Administrative User" rendered="#{UserBean.currentUser.isAdmin}"/>
+                            </h:panelGrid>
+                            <h3>Passport Information </h3>
+                            <h:panelGrid columns="2" styleClass="displayTable" rowClasses="tableRow">
+                            <h:outputText value="Passport Number: "/>
+                            <h:inputText value="#{UserBean.currentUser.passportNumber}" readonly="true"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2">
+                            <h:commandButton type="submit" value="Back" action="/index" /> 
                             
-                            <h:column>
-                                <f:facet name="header">Address</f:facet>
-                                <h:outputText value="CONVERT FROM ARRAY"/>
-                            </h:column>
-                            
-                            <h:column>
-                                <f:facet name="header">Passport Number</f:facet>
-                                <h:outputText value="#{UserBean.currentUser.passportNumber}"/>
-                            </h:column>
-                        </h:dataTable>   
-                </h:form>
+                            </h:panelGrid>
+                            </h:panelGrid>
+                    </h:form>
+                    </div>
+                </div>
             </ui:define>
          </ui:composition>
     </h:body>

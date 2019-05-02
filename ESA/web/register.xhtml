@@ -8,7 +8,7 @@
         <title>User Registration</title>
     </h:head>
     <h:body>
-         <ui:composition template = "templates/common.xhtml">
+         <ui:composition template = "/templates/common.xhtml">
             <ui:define name="content">
                 <div align="center" style="background-image:url(resources/img/background.png);height: 750px;" class="displayContainer">
                     <h2>Create an account</h2>
@@ -48,7 +48,7 @@
                             </h:panelGrid>
                             <h:panelGrid columns="2">
                             <h:commandButton type="submit" value="Create account" action="#{registerBean.register()}" /> 
-                            <h:commandButton type="submit" value="Cancel" action="index" /> 
+                            <h:commandButton type="submit" value="Cancel" action="/index" /> 
                             </h:panelGrid>
                             </h:panelGrid>
                     </h:form>

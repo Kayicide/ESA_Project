@@ -33,7 +33,7 @@ public class UserGateway extends GatewayAbstract {
                 if (rs.getString("password").equals(user.getPassword())) {
                     //gets the user information
                     user.setFirstName(rs.getString("FIRSTNAME"));
-                    user.setFirstName(rs.getString("SURNAME"));
+                    user.setSurname(rs.getString("SURNAME"));
                     user.setPassword(rs.getString("PASSWORD"));
                     addressID = rs.getInt("ADDRESS_ID");
                     user.setPassportNumber(rs.getString("PASSPORT_NUMBER"));

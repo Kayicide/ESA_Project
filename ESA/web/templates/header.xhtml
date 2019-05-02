@@ -16,7 +16,7 @@ and open the template in the editor.
             <h:form class="topnav">
                 <div style="float: left;">
                     <h:commandButton value="Home" action="/index" styleClass="myButtons"></h:commandButton>
-                    <h:commandButton value="Flights" action="flights.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
+                    <h:commandButton value="Flights" action="/flights.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:commandButton value="My Bookings" action="/bookings.xhtml" styleClass="myButtons" rendered="#{UserBean.loggedIn}"></h:commandButton>
                     <h:panelGroup rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">
                     <div class="dropdown">
@@ -27,9 +27,9 @@ and open the template in the editor.
                        
                         <div class="dropdown-content">
                         <a href="flights.xhtml">View Flights</a>
-                        <a href="planes.xhtml">View Planes</a>
-                        <a href="airports.xhtml">View Airports</a>
-                        <a href="routes.xhtml">View Routes</a>
+                        <a href="admin/planes.xhtml">View Planes</a>
+                        <a href="admin/airports.xhtml">View Airports</a>
+                        <a href="admin/routes.xhtml">View Routes</a>
                         </div>
                     </div>
                 </h:panelGroup>

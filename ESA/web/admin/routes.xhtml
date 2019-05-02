@@ -9,43 +9,44 @@
         <title>Flights</title>
     </h:head>
     <h:body>
-         <ui:composition template = "templates/common.xhtml">
-            <ui:define name="content">
+         <ui:composition template = "/templates/common.xhtml">
+            <ui:define name="content"> 
                 <div align="center" class="displayContainer">
                 <h:form >
-                    <h:dataTable value="#{planeBean.allPlanes}" 
-                                 var="plane"
+                    <h:dataTable value="#{routeBean.allRoutes}" 
+                                 var="route"
                                  cellpadding="10"
                                  styleClass="displayTable" 
-                                 headerClass="TableHeader"
-                                 rowClasses="TableOddRow,TableEvenRow">
+                                 >
+                        <h:column>
+                            <f:facet name="header">Route ID</f:facet>
+                            <h:outputText value="#{route.routeID}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Departing</f:facet>
+                            <h:outputText value="#{route.departureAirport.name}" />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Destination</f:facet>
+                            <h:outputText value="#{route.destination.name}" />
+                        </h:column>
+                        
                         <h:column>
                             <f:facet name="header">Plane ID</f:facet>
-                            <h:outputText value="#{plane.planeID}" />
+                            <h:outputText value="#{route.plane.planeID}" />
                         </h:column>
-                        
                         <h:column>
-                            <f:facet name="header">Type</f:facet>
-                            <h:outputText value="#{plane.planeModel}" />
+                            <f:facet name="header">Plane Type</f:facet>
+                            <h:outputText value="#{route.plane.planeModel}" />
                         </h:column>
-                        
-                        <h:column>
-                            <f:facet name="header">Capacity</f:facet>
-                            <h:outputText value="#{plane.capacity}" />
-                        </h:column>
-                        
-                        <h:column>
-                            <f:facet name="header">Crew Number</f:facet>
-                            <h:outputText value="#{plane.noCrew}" />
-                        </h:column>
-                        
+
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
-                            <h:commandButton value="Delete" action="#{planeBean.deletePlane(plane.planeID)}" />
                         </h:column>
                     </h:dataTable>
-                    <br></br>
-                    <h:commandButton value="Add" action="addplane.xhtml" styleClass="myButtons" rendered="#{UserBean.currentUser.isAdmin}"/>
+                    <h:commandButton value="Add" action="/admin/addroute.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
                 </h:form>
                 </div>
             </ui:define>
