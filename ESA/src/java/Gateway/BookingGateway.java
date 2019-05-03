@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,22 +30,27 @@ public class BookingGateway extends GatewayAbstract{
     private Connection conn;
         
     public boolean insert(BookingDTO booking){
-        boolean added = false;
-        System.out.println("Trying to insert booking");
-        System.out.println(booking.getUser());
-        System.out.println(booking.getFlight().getFlightID());
         try
         {
             conn = database.getConnection();
+            //check if the user has already booked it
+            PreparedStatement stmt3 = conn.prepareStatement("SELECT * FROM BOOKING WHERE USERNAME = ? AND FLIGHT_ID = ?");
+            stmt3.setString(1, booking.getUser().getUsername());
+            stmt3.setInt(2, booking.getFlight().getFlightID());
+            ResultSet rs2 = stmt3.executeQuery();
+            if(rs2.next()){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You have already booked this flight"));
+                return false;
+            }
+            
+            
+            //since the user hasn't booked it then book it
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO BOOKING (USERNAME,FLIGHT_ID, TIME_BOOKED) values (?,?,?)");
-            
-            
             stmt.setString(1, booking.getUser().getUsername());
             stmt.setInt(2, booking.getFlight().getFlightID());
             stmt.setTimestamp(3, booking.getDateTimeBooked());
             
             int rows = stmt.executeUpdate();
-            added = rows == 1;
             
             stmt.close();
             finishSQL(conn);
@@ -52,11 +59,11 @@ public class BookingGateway extends GatewayAbstract{
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            added = false;
             finishSQL(conn);
+            return false;
         }
         
-        return added;  
+        return true;  
     }
         
     public boolean delete(int id){
