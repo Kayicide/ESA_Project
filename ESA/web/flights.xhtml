@@ -49,7 +49,7 @@
 
                             <h:column rendered="#{UserBean.currentUser.isAdmin}">
                                 <f:facet name="header">Admin Actions</f:facet>
-                                <h:commandButton value="Delete" action="#{flightBean.deleteFlight(flight.flightID)}" />
+                                <h:commandButton onclick="if (! confirm('Really Delete This?\n(It will delete bookings for it)') ) { return false;}; return true;" value="Delete" action="#{flightBean.deleteFlight(flight.flightID)}" />
                             </h:column>
 
                         </h:dataTable>

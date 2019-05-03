@@ -41,7 +41,7 @@
                         
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
-                            <h:commandButton value="Delete" action="#{planeBean.deletePlane(plane.planeID)}" />
+                            <h:commandButton value="Delete" onclick="if (! confirm('Really Delete This?\n(It will delete routes/flights/bookings relying on it)') ) { return false;}; return true;" action="#{planeBean.deletePlane(plane.planeID)}" />
                         </h:column>
                     </h:dataTable>
                     <br></br>

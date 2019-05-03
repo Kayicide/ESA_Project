@@ -44,6 +44,7 @@
 
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
+                            <h:commandButton onclick="if (! confirm('Really Delete This?\n(It will delete flights/bookings relying on it)') ) { return false;}; return true;" value="Delete" action="#{routeBean.deleteRoute(route.routeID)}" rendered="#{UserBean.currentUser.isAdmin}"/>
                         </h:column>
                     </h:dataTable>
                     <h:commandButton value="Add" action="/admin/addroute.xhtml" rendered="#{UserBean.currentUser.isAdmin}"/>
