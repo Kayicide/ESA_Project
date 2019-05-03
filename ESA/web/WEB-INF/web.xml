@@ -13,6 +13,10 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/faces/admin/*</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30
