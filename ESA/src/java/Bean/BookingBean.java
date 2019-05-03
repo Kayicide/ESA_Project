@@ -15,23 +15,12 @@ import javax.inject.Named;
 @Named(value = "bookingBean")
 @RequestScoped
 public class BookingBean implements Serializable {
-    
-    
-    UserBean userbean = new UserBean();
-    UserDTO user = userbean.getCurrentUser();
-    
     public ArrayList<BookingDTO>getAllBookings(String username){
-        System.out.println("Getting all bookings for " + username);
         return (ArrayList<BookingDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_BOOKINGS, username).execute();
     }
     
-    public void deleteBooking(int id){
-        System.out.println("deleting booking " + id);
+    public String deleteBooking(int id){
         CommandFactory.createCommand(CommandFactory.DELETE_BOOKING, id).execute();
+        return "/bookings.xhtml";
     }
-    
-   
-    
-    
-    
 }

@@ -80,7 +80,6 @@ public class BookingGateway extends GatewayAbstract{
             
             
             if(stmt.executeUpdate() == 0){
-                
                 stmt.close();
                 finishSQL(conn);
                 return false;
@@ -106,8 +105,8 @@ public class BookingGateway extends GatewayAbstract{
         {
             conn = database.getConnection();
             PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT FLIGHT.DEPART_TIME, FLIGHT.ARRIVAL_TIME, FLIGHT.ID, FLIGHT.ROUTE_ID, Route.ID, Plane.ID as PlaneID, Plane.TYPE, Plane.CAPACITY, Plane.CREW, a.ID as aID, a.NAME as aNAME, a.ADDRESS_ID as aAddress_ID, a.TERMINALS as aTERMINALS, a.GATES as aGATES, b.ID as bID, b.NAME as bNAME, b.ADDRESS_ID as bADDRESS_ID, b.TERMINALS as bTERMINALS, b.GATES as bGATES, USER_INFO.USERNAME, USER_INFO.FIRSTNAME, USER_INFO.SURNAME, USER_INFO.PASSPORT_NUMBER, BOOKING.ID, BOOKING.USERNAME, BOOKING.FLIGHT_ID, BOOKING.TIME_BOOKED FROM BOOKING"
-                    + " JOIN FLIGHT on booking.FLIGHT_ID = flight.ID"
+                    "SELECT FLIGHT.DEPART_TIME, FLIGHT.ARRIVAL_TIME, FLIGHT.ID as FlightID, FLIGHT.ROUTE_ID, Route.ID as RouteID, Plane.ID as PlaneID, Plane.TYPE, Plane.CAPACITY, Plane.CREW, a.ID as aID, a.NAME as aNAME, a.ADDRESS_ID as aAddress_ID, a.TERMINALS as aTERMINALS, a.GATES as aGATES, b.ID as bID, b.NAME as bNAME, b.ADDRESS_ID as bADDRESS_ID, b.TERMINALS as bTERMINALS, b.GATES as bGATES, USER_INFO.USERNAME, USER_INFO.FIRSTNAME, USER_INFO.SURNAME, USER_INFO.PASSPORT_NUMBER, BOOKING.ID as BookingID, BOOKING.USERNAME, BOOKING.FLIGHT_ID, BOOKING.TIME_BOOKED FROM BOOKING"
+                    + " JOIN FLIGHT on booking.FLIGHT_ID = FLIGHT.ID"
                     + " JOIN ROUTE on flight.ROUTE_ID = ROUTE.ID"
                     + " JOIN Airport a on STARTING_AIRPORT_ID = a.ID"
                     + " JOIN Airport b on FINISHING_AIRPORT_ID = b.ID"
@@ -131,7 +130,7 @@ public class BookingGateway extends GatewayAbstract{
                         plane);
                 
                 FlightDTO flight = new FlightDTO(
-                        rs.getInt("ID"),
+                        rs.getInt("FlightID"),
                         route,
                         rs.getTimestamp("DEPART_TIME"),
                         rs.getTimestamp("ARRIVAL_TIME"));
@@ -147,7 +146,7 @@ public class BookingGateway extends GatewayAbstract{
                 );
                 
                 BookingDTO booking = new BookingDTO(
-                        rs.getInt("ID"),
+                        rs.getInt("BookingID"),
                         user,
                         flight,
                         rs.getTimestamp("TIME_BOOKED"));
@@ -171,6 +170,8 @@ public class BookingGateway extends GatewayAbstract{
     
     }
     
+    
+    // not used / working, not sure what it's even doing tbh?????? 
     public ArrayList<Object> getAll(){
         ArrayList<Object> bookingList = new ArrayList<>();
         
