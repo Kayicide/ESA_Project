@@ -15,6 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -29,8 +31,17 @@ public class AirportGateway extends GatewayAbstract {
         boolean added = false;
         
         try
-        {   
+        {
             conn = database.getConnection();
+            //checks if airport already exists
+            PreparedStatement stmt3 = conn.prepareStatement("SELECT * FROM AIRPORT WHERE ID = ?");
+            stmt3.setString(1, airport.getAirportID());
+            ResultSet rs2 = stmt3.executeQuery();
+            if(rs2.next()){
+                FacesContext.getCurrentInstance().addMessage("addairportForm:irportIDError", new FacesMessage("Airport already exists"));
+                System.out.println("ALREADY EXISTS");
+                return false;
+            }
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO ADDRESS (LINE1, LINE2, LINE3, LINE4, LINE5) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, (airport.getLocation()[0]));
             stmt.setString(2, (airport.getLocation()[1]));

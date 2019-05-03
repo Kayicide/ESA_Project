@@ -13,11 +13,11 @@
                 <div align="center" style="background-image:url(resources/img/background.png);height: 750px;">
                     <h2>Add Airport</h2>
                     <div class="displayContainer">
-                        <h:form>
+                        <h:form id="addairportForm">
                             <h3>Airport Details </h3>
                             <h:panelGrid columns="2" styleClass="displayTable" >
                             <h:outputText value="Airport Code: "/>
-                            <h:inputText value="#{addAirportBean.airportID}"/>
+                            <h:inputText value="#{addAirportBean.airportID}" id="airportID"/>
                             <h:outputText value="Airport Name: "/>
                             <h:inputText value="#{addAirportBean.name}"/>
                             <h:outputText value="Number of Terminals: "/>

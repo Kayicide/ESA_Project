@@ -105,7 +105,10 @@ public class AddAirportBean {
         
         AirportDTO airport = new AirportDTO(airportID, name, noTerminals, noGates);
         airport.setLocation(address);
-        CommandFactory.createCommand(CommandFactory.ADD_AIRPORT, airport).execute();
-        return "airports.xhtml";
+        if((Boolean)CommandFactory.createCommand(CommandFactory.ADD_AIRPORT, airport).execute()){
+            return "/admin/airports.xhtml";
+        }else{
+            return "/admin/addairport.xhtml";
+        }
     }
 }
