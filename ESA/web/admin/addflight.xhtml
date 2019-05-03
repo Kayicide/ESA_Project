@@ -19,18 +19,21 @@
                             <h:selectOneMenu value="#{addFlightBean.routeID}" required="true" requiredMessage="Please enter an airport!">
                                 <f:selectItems value="#{routeBean.allRoutes}" var="route" itemLabel="#{route.departureAirport.name}" itemValue="#{route.routeID}" />
                             </h:selectOneMenu>
-                            <p><b>Arrival Time:</b><br>(dd/MM/yyyy HH:mm)</br></p>
+                            <p><b>Departure Time:</b><br>(dd/MM/yyyy HH:mm)</br></p>
                             <h:inputText value="#{addFlightBean.departureDateTime}"
                                         required="true"
                                         requiredMessage="Please enter the Date!">
                                 <f:converter converterId="DateConverter" />
+                                <f:validator validatorId="dateValidator" />
                             </h:inputText>
                             <p><b>Arrival Time:</b><br>(dd/MM/yyyy HH:mm)</br></p>
                             <h:inputText value="#{addFlightBean.arrivalDateTime}"
                                         required="true"
                                         requiredMessage="Please enter the Date!">
                                 <f:converter converterId="DateConverter" />
+                                <f:validator validatorId="dateValidator" />
                             </h:inputText>
+                            <h:messages style="color: red" />
                         </h:panelGrid>
                         <h:commandButton value="Submit" action="#{addFlightBean.addFlight()}" />
                     </h:form>

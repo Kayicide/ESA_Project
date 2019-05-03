@@ -11,6 +11,8 @@ import DTO.RouteDTO;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -61,8 +63,14 @@ public class AddFlightBean {
     }
 
     public String addFlight(){
+        
+        if(arrivalDateTime.before(departureDateTime)){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Arrival is before Departure!"));
+            return "";
+        }
+        
         FlightDTO flight = new FlightDTO(new RouteDTO(routeID), departureDateTime, arrivalDateTime, status);
         CommandFactory.createCommand(CommandFactory.ADD_FLIGHT, flight).execute();
-        return "index.xhtml";
+        return "/index.xhtml";
     }
 }
