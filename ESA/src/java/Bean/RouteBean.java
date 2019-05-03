@@ -29,7 +29,7 @@ public class RouteBean implements Serializable{
         return (ArrayList<RouteDTO>)CommandFactory.createCommand(CommandFactory.GET_ALL_ROUTES).execute();
     }
     
-    public void deleteFlight(int id){
+    public void deleteRoute(int id){
         CommandFactory.createCommand(CommandFactory.DELETE_ROUTE, id).execute();
     }
 }
