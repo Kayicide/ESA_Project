@@ -48,7 +48,7 @@ public class LoggedInFilter implements Filter {
         boolean firstLoad = request.getRequestURI().equals("/ESA/");
         boolean isStaticResource = request.getRequestURI().startsWith(request.getContextPath() + "/faces" + ResourceHandler.RESOURCE_IDENTIFIER);
 
-        if (loggedIn || loginRequest || registerRequest || homeRequest || isStaticResource)
+        if (loggedIn || loginRequest || registerRequest || homeRequest || isStaticResource || firstLoad)
         {
             System.out.println("Allowed");
             chain.doFilter(request, response);
