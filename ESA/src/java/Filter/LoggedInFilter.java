@@ -37,18 +37,25 @@ public class LoggedInFilter implements Filter {
         String registerURI = request.getContextPath() + "/faces/register.xhtml";
         String homeURI = request.getContextPath() + "/faces/index.xhtml";
 
+        System.out.println(homeURI);
+        System.out.println(request.getRequestURI());
+        
+        
         boolean loggedIn = user.getLoggedIn();
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         boolean registerRequest = request.getRequestURI().equals(registerURI);
         boolean homeRequest = request.getRequestURI().equals(homeURI);
+        boolean firstLoad = request.getRequestURI().equals("/ESA/");
         boolean isStaticResource = request.getRequestURI().startsWith(request.getContextPath() + "/faces" + ResourceHandler.RESOURCE_IDENTIFIER);
 
         if (loggedIn || loginRequest || registerRequest || homeRequest || isStaticResource)
         {
+            System.out.println("Allowed");
             chain.doFilter(request, response);
         }
         else
         {
+            System.out.println("Denied");
             response.sendRedirect(loginURI);
         }
     }
