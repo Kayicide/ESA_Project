@@ -18,9 +18,9 @@
                             <h:outputText value="Type: "/>
                             <h:inputText value="#{addPlaneBean.planeModel}"/>
                             <h:outputText value="Capacity: "/>
-                            <h:inputText value="#{addPlaneBean.capacity}" converterMessage="Please enter digits only." />
+                            <h:inputText value="#{addPlaneBean.capacity}" converterMessage="Interger input only!" />
                             <h:outputText value="Crew Number: "/>
-                            <h:inputText value="#{addPlaneBean.noCrew}" converterMessage="Please enter digits only." />
+                            <h:inputText value="#{addPlaneBean.noCrew}" converterMessage="Interger input only!" />
                             </h:panelGrid>
                             <br></br>
                             <h:commandButton value="Submit" action="#{addPlaneBean.addPlane()}" />

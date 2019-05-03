@@ -17,7 +17,7 @@
                         <h:panelGrid columns="2" styleClass="displayTable">
                             <p><b>Route:</b></p>
                             <h:selectOneMenu value="#{addFlightBean.routeID}" required="true" requiredMessage="Please enter an airport!">
-                                <f:selectItems value="#{routeBean.allRoutes}" var="route" itemLabel="#{route.departureAirport.name}" itemValue="#{route.routeID}" />
+                                <f:selectItems value="#{routeBean.allRoutes}" var="route" itemLabel="#{route.departureAirport.name} to #{route.destination.name}" itemValue="#{route.routeID}" />
                             </h:selectOneMenu>
                             <p><b>Departure Time:</b><br>(dd/MM/yyyy HH:mm)</br></p>
                             <h:inputText value="#{addFlightBean.departureDateTime}"
