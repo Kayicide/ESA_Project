@@ -35,13 +35,15 @@ public class LoggedInFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         String loginURI = request.getContextPath() + "/faces/login.xhtml";
         String registerURI = request.getContextPath() + "/faces/register.xhtml";
+        String homeURI = request.getContextPath() + "/faces/index.xhtml";
 
         boolean loggedIn = user.getLoggedIn();
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         boolean registerRequest = request.getRequestURI().equals(registerURI);
+        boolean homeRequest = request.getRequestURI().equals(homeURI);
         boolean isStaticResource = request.getRequestURI().startsWith(request.getContextPath() + "/faces" + ResourceHandler.RESOURCE_IDENTIFIER);
 
-        if (loggedIn || loginRequest || registerRequest || isStaticResource)
+        if (loggedIn || loginRequest || registerRequest || homeRequest || isStaticResource)
         {
             chain.doFilter(request, response);
         }
