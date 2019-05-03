@@ -32,6 +32,7 @@ public class AirportGateway extends GatewayAbstract {
         
         if(airport.getAirportID() == null || airport.getAirportID() == ""){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Invalid Airport ID"));
+            return false;
         }
         
         
