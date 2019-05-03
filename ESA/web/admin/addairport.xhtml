@@ -17,13 +17,13 @@
                             <h3>Airport Details </h3>
                             <h:panelGrid columns="2" styleClass="displayTable" >
                             <h:outputText value="Airport Code: "/>
-                            <h:inputText value="#{addAirportBean.airportID}" id="airportID"/>
+                            <h:inputText required="true" value="#{addAirportBean.airportID}" id="airportID"/>
                             <h:outputText value="Airport Name: "/>
-                            <h:inputText value="#{addAirportBean.name}"/>
+                            <h:inputText required="true" value="#{addAirportBean.name}"/>
                             <h:outputText value="Number of Terminals: "/>
-                            <h:inputText value="#{addAirportBean.noTerminals}" converterMessage="Please enter digits only." />
+                            <h:inputText required="true" value="#{addAirportBean.noTerminals}" converterMessage="Please enter digits only." />
                             <h:outputText value="Number of Gates: "/>
-                            <h:inputText value="#{addAirportBean.noGates}" converterMessage="Please enter digits only." />
+                            <h:inputText required="true" value="#{addAirportBean.noGates}" converterMessage="Please enter digits only." />
                             
                            
                             
@@ -37,8 +37,8 @@
                             <h:inputText value="#{addAirportBean.line4}"/>
                             <h:outputText value="Postcode: "/>
                             <h:inputText value="#{addAirportBean.line5}"/>
+                            <h:messages style="color: red" />
                             </h:panelGrid>
-                            <br></br>
                             <h:commandButton value="Submit" action="#{addAirportBean.addAirport()}" />
                     </h:form>
                     </div>

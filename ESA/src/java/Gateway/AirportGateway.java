@@ -30,6 +30,11 @@ public class AirportGateway extends GatewayAbstract {
         int addressID = 0;
         boolean added = false;
         
+        if(airport.getAirportID() == null || airport.getAirportID() == ""){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Invalid Airport ID"));
+        }
+        
+        
         try
         {
             conn = database.getConnection();
@@ -38,8 +43,7 @@ public class AirportGateway extends GatewayAbstract {
             stmt3.setString(1, airport.getAirportID());
             ResultSet rs2 = stmt3.executeQuery();
             if(rs2.next()){
-                FacesContext.getCurrentInstance().addMessage("addairportForm:irportIDError", new FacesMessage("Airport already exists"));
-                System.out.println("ALREADY EXISTS");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Airport already exists"));
                 return false;
             }
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO ADDRESS (LINE1, LINE2, LINE3, LINE4, LINE5) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
