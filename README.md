@@ -12,6 +12,6 @@
 1. Register an Account on the website
 2. Run this code inserting your accounts username:
 ```sql
-UPDATE USER_INFO SET USER_INFO."ADMIN" = 'true' WHERE USER_INFO.USERNAME = '[Your Username]';
+UPDATE USER_INFO SET USER_INFO."ADMIN" = 'true' WHERE USER_INFO.USERNAME = '<Your Username>';
 ```
 
