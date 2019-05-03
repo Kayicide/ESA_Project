@@ -20,7 +20,7 @@ import javax.faces.convert.FacesConverter;
 public class DateConverter implements Converter{
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        Date date;
+        Date date = null;
         Timestamp returnDate = null;
         try{
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");

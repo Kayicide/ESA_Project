@@ -47,8 +47,8 @@
                                 <h:commandButton value="Book" action="#{addBookingBean.addBooking(flight.flightID, UserBean.currentUser)}" />
                             </h:column>
 
-                            <h:column>
-                                <f:facet name="header" rendered="#{UserBean.loggedIn and UserBean.currentUser.isAdmin}">Administrator actions</f:facet>
+                            <h:column rendered="#{UserBean.currentUser.isAdmin}">
+                                <f:facet name="header">Admin Actions</f:facet>
                                 <h:commandButton value="Delete" action="#{flightBean.deleteFlight(flight.flightID)}" />
                             </h:column>
 

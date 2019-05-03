@@ -20,25 +20,13 @@ import javax.inject.Named;
 @Named(value = "addBookingBean")
 @RequestScoped
 public class AddBookingBean {
-    
-
-    
-    
-    
-    UserBean userbean = new UserBean();
-    FlightBean flightbean = new FlightBean();
-    
-   
     Timestamp bookTime = new Timestamp(System.currentTimeMillis());
 
     public String addBooking(int flightID, UserDTO user){
-        
-       
         FlightDTO flight = new FlightDTO(flightID,null,null,null,null);
         BookingDTO booking = new BookingDTO(0,user,flight,bookTime);
-        System.out.println("Attempting insert of booking with flight: " + flight.getFlightID() + " as user: " + user.getUsername());
         CommandFactory.createCommand(CommandFactory.ADD_BOOKING, booking).execute();
-        return "";
+        return "/bookings.xhtml";
     }
             
 }
